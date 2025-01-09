@@ -102,6 +102,12 @@ EZGif Convertor: https://ezgif.com/
 
 ###### [*Back to contents*](#contents)
 
+#### User Profiles Wireframe
+
+![Profiles Wireframe](docs/wireframes/wf-user-profile.png "Video Gaming Tracker Profiles")
+
+###### [*Back to contents*](#contents)
+
 #### Sign up Wireframe
 
 ![Sign up Wireframe](docs/wireframes/wf-sign-up.png "Video Gaming Tracker Sign up")
@@ -122,7 +128,15 @@ EZGif Convertor: https://ezgif.com/
 
 #### Edit Profile Wireframe
 
-![Edit Profile Wireframe](docs/wireframes/wf-edit-profile.png "Video Gaming Tracker Edit Profile")
+##### Logged In View
+
+![Edit Profile Logged In Wireframe](docs/wireframes/wf-edit-loggedin.png "Video Gaming Tracker Edit Profile")
+
+###### [*Back to contents*](#contents)
+
+##### Logged Out View
+
+![Edit Profile Logged Out Wireframe](docs/wireframes/wf-edit-loggedout.png "Video Gaming Tracker Edit Profile")
 
 ###### [*Back to contents*](#contents)
 
