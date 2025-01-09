@@ -1,131 +1,407 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<!-- TODO:
+Security
+-Allauth
+-Defensive Design
+-CSRF Tokens
 
-Welcome Michael Cornall,
+CRUD
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+Project Setup:
 
-## Gitpod Reminders
+Project setup
+```
+pip install Django~=4.2.1
+pip3 install dj-database-url~=0.5 psycopg2
+pip3 install gunicorn~=20.1
+pip3 freeze --local > requirements.txt
+django-admin startproject videoGameTracker .
+echo "web: gunicorn videoGameTracker.wsgi" > Procfile
+echo 'import os
+os.environ["DATABASE_URL"]=""
+os.environ["SECRET_KEY"]="nananana"
+os.environ["DEBUG"]=1' > env.py
+echo "
+env.py" >> .gitignore
+python3 manage.py migrate
+python3 manage.py runserver
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+Adjust allowed hosts
+CSRF_TRUSTER_ORIGINS
+python3 manage.py startapp <<appname>>
+Add to installed apps
 
-`python3 -m http.server`
+Create DB & add to config vars
 
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
-
-### Connecting your Mongo database
-
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
-
-------
-
-## Release History
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**June 18, 2024,** Add Mongo back into template
-
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
-
-**May 28 2024:** Fix Mongo and Links installs
-
-**April 26 2024:** Update node version to 16
-
-**September 20 2023:** Update Python version to 3.9.17.
-
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
-
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
-
-**July 2 2021:** Remove extensions that are not available in Open VSX.
-
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
-
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+Heroku:
+Add config vars
+Link to github
+check eco dinos are on
 
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+
+EZGif Convertor: https://ezgif.com/
+-->
+
+# Video Gaming Tracker
+<!-- TODO: Update to heroku url -->
+## [Link to Live Site](<https://heroku url>)
+
+## Contents
+<!-- TODO: AI this  -->
+## Introduction
+
+###### [*Back to contents*](#contents)
+<!-- TODO: -->
+## User Experience
+
+###### [*Back to contents*](#contents)
+
+### Stories
+
+###### [*Back to contents*](#contents)
+
+#### External User Story
+<!-- TODO:  -->
+###### [*Back to contents*](#contents)
+
+#### Site Owner User Story
+<!-- TODO: -->
+###### [*Back to contents*](#contents)
+
+### Strategy
+<!-- TODO: -->
+
+#### Agile
+
+###### [*Back to contents*](#contents)
+
+#### MoSCoW
+
+###### [*Back to contents*](#contents)
+
+### Scope
+<!-- TODO: 
+-->
+
+###### [*Back to contents*](#contents)
+
+### Wireframes
+
+###### [*Back to contents*](#contents)
+
+#### Home Wireframe
+
+![Home Wireframe](docs/wireframes/wf-home.png "Video Gaming Tracker Home")
+
+###### [*Back to contents*](#contents)
+
+#### Profiles Wireframe
+
+![Profiles Wireframe](docs/wireframes/wf-profiles.png "Video Gaming Tracker Profiles")
+
+###### [*Back to contents*](#contents)
+
+#### Sign up Wireframe
+
+![Sign up Wireframe](docs/wireframes/wf-sign-up.png "Video Gaming Tracker Sign up")
+
+###### [*Back to contents*](#contents)
+
+#### Login Wireframe
+
+![Login Wireframe](docs/wireframes/wf-login.png "Video Gaming Tracker Login")
+
+###### [*Back to contents*](#contents)
+
+#### Logout Wireframe
+
+![Logout Wireframe](docs/wireframes/wf-logout.png "Video Gaming Tracker Logout")
+
+###### [*Back to contents*](#contents)
+
+#### Edit Profile Wireframe
+
+![Edit Profile Wireframe](docs/wireframes/wf-edit-profile.png "Video Gaming Tracker Edit Profile")
+
+###### [*Back to contents*](#contents)
+
+#### Mobile / Tablet / Desktop breakpoints
+<!-- TODO: 
+-->
+
+###### [*Back to contents*](#contents)
+
+## Design
+
+###### [*Back to contents*](#contents)
+
+### Colour Scheme
+<!-- TODO: 
+ -->
+
+### Imagery
+<!-- TODO: find out where images come from -->
+<!-- The imagery used in this project has been acquired from xyz -->
+
+###### [*Back to contents*](#contents)
+
+### Typography
+
+The typography I have used Google Fonts, I have searched on there and imported fonts that I think will add to the overall vision of the project, to round it out nicely for a better user experience.
+
+###### [*Back to contents*](#contents)
+
+## Website Features
+
+###### [*Back to contents*](#contents)
+
+### Home
+
+When a user loads the site, a homepage is displayed, this page has a logo, site title & navbar, along with a brief overview of what is available with and without an account.
+
+###### [*Back to contents*](#contents)
+### Profiles
+
+A page that is accessible by all, it allows to view all existing users who have marked their profile as public - being accessible without needing to be logged in
+
+### Sign Up
+
+#### Logged In
+
+A page showing which account the user is signed in to, along with buttons to either go to the Home page, or Logout
+
+#### Logged Out
+
+A page showing the sign up form, allowing a user to sign up to the website
+
+### Log In
+
+#### Logged In
+
+A page showing which account the user is signed in to, along with buttons to either go to the Home page, or Logout
+
+#### Logged Out
+
+A page showing a form to sign into a created account, allowing users to sign into their account on the website
+
+### Log Out
+
+#### Logged Out
+
+A page showing a form to sign into a created account, allowing users to sign into their account on the website
+
+#### Logged In
+
+A page showing a page with the options to either go to the Home page, or confirm Logging out of the account
+
+
+### Edit Profile
+
+#### Logged In
+
+TODO:
+
+#### Logged Out
+
+A page informing that they must be logged in to edit their profile, provides a pair of buttons that redirect the user to either the Home page, or the Sign In Login Page
+
+
+## Future Features
+<!-- TODO: -->
+
+###### [*Back to contents*](#contents)
+
+## Technologies Used
+
+###### [*Back to contents*](#contents)
+
+### HTML Language
+
+HTML is used as the base to the project, utilising [*Django*](#django) to piece the files together to dynamically serve the webpages to the user depending on if they are loggined in or not, as well as the actions they are performing.
+
+###### [*Back to contents*](#contents)
+
+### CSS Styling
+
+CSS is used to provide style to the website to make it more visually appealing to the user of the website. I have also utilised [*Bootstrap*](#bootstrap) as part of the CSS Styling.
+
+###### [*Back to contents*](#contents)
+
+### bash terminal
+
+I used bash as my terminal of choice, using it for various things from setting alias' for commonly used commands, creating directories and files, as well as interfacing with git to add, commit and push to [*GitHub*](#github).
+
+###### [*Back to contents*](#contents)
+
+### Bootstrap
+
+I have utilised boostrap to provide a template for numerous IDs and classes for the formatting of the project.
+
+###### [*Back to contents*](#contents)
+
+### Django
+
+Django framework has been used to dynamically load views and models via Django Template Language (DTL) based on if a user is logged in or not, as well as adding/removing entries from a database in a secure way and protecting from malicious attacks via backend server processing
+
+###### [*Back to contents*](#contents)
+
+### Git
+
+Git has been used to allow for easy versioning of the project, as well as tracking changes which may become important for troubleshooting if any errors are introduced as the code is developed
+
+### GitHub
+
+GitHub has been used as a central repository where the code can be accessed online. It has also been linked to heroku allowing heroku to fetch the repository from GitHub to deploy the project into an online environment, as well as testing the project both locally and online as it is developed to ensure consistent behaviours
+
+###### [*Back to contents*](#contents)
+
+### Gitpod
+
+Gitpod has been used as a remote workspace, allowing for a sandboxed environment where variables can be controlled to ensure no conflicts with other software that may be installed on my personal device
+
+###### [*Back to contents*](#contents)
+
+### Heroku
+
+Heroku has been used to provide the back end processing of the project, allowing it to run Django and generate the HTML of the pages that the user is requesting dynamically
+
+###### [*Back to contents*](#contents)
+
+### Postgres
+
+Data has been stored within a Postgres database that has been provided by [*CodeInstitute*](#codeinstitute).
+
+###### [*Back to contents*](#contents)
+
+### Visual Studio Code
+
+Visual Studio Code has been used to create the project as a pseudo-IDE, allowing for the use of emmet commands to help create the code in an efficient manner, as well as CoPilot integration
+
+###### [*Back to contents*](#contents)
+
+### CoPilot
+
+CoPilot has been used as the AI tool in this project, utilising it for both helping with code creation such as pulling bootstrap templates into the code rather than using a search engine and the documentation where possible. It has also been used to help troubleshoot any errors within the code, and helping with getting the layout of the project correct in places where I may have struggled without it.
+
+###### [*Back to contents*](#contents)
+
+## Deployment
+
+1) Add the required files to the git repository with the command `git add .`
+2) Commit the changes to the repository with the command commit command `git commit -m "Final project commit"`
+<!-- TODO: Add heroku steps 
+link to github
+Config Vars
+deploy
+-->
+
+###### [*Back to contents*](#contents)
+
+## Testing
+
+###### [*Back to contents*](#contents)
+
+### Responsivity Images
+
+###### [*Back to contents*](#contents)
+<!-- TODO: Add all pages -->
+
+###### [*Back to contents*](#contents)
+ 
+### Validation
+
+###### [*Back to contents*](#contents)
+
+#### HTML
+<!-- TODO: Add for all pages
+ -->
+
+#### CSS
+<!-- TODO: Add for all pages
+-->
+
+### Lighthouse Scores
+
+###### [*Back to contents*](#contents)
+
+<!-- TODO: Add extra Pages from project-->
+## Bugs
+<!-- TODO: -->
+###### [*Back to contents*](#contents)
+
+## Credits
+
+###### [*Back to contents*](#contents)
+
+### [Bootstrap](https://www.getbootstrap.com) - [Version 5.3.3](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+
+###### [*Back to contents*](#contents)
+
+### CodeInstitute
+
+###### [*Back to contents*](#contents)
+
+#### Codestar Walkthrough Blog
+
+I have used the content from the Django walkthrough as a guide for creating the project, including it's apps, to have a guide on where to start with the ability to change field names to amend the functionality from a blog post to being a video game tracker!
+
+#### [Postgres Database](#postgres)
+
+###### [*Back to contents*](#contents)
+
+#### Javascript code used to collapse navbar when a link is clicked
+
+```javascript
+<script>
+    document
+        .querySelectorAll(".navbar-collapse .nav-link")
+        .forEach((link) => {
+            link.addEventListener("click", function (e) {
+                let section = document.querySelector(e.target.getAttribute("href"));
+                if (section) {
+                    e.preventDefault(); // Prevent default anchor click behavior
+                    let navbarHeight = document.querySelector(".navbar-toggler").offsetHeight;
+                    window.scroll({
+                        top: section.offsetTop - navbarHeight, // Adjust for navbar height
+                        behavior: "smooth",
+                    });
+                    document
+                        .querySelector(".navbar-collapse")
+                        .classList.remove("show"); // Collapse navbar
+                }
+            });
+        });
+</script>
 ```
 
-**Anything more?**
+###### [*Back to contents*](#contents)
+<!-- TODO: -->
+<!-- ### [Coolors for the colour scheme](https://coolors.co/ebebeb-c2b8b2-197bbd-090c9b-2a2b2a)
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+###### [*Back to contents*](#contents) -->
 
----
+### Eraser.io
 
-Happy coding!
+#### [Diagram GPT](https://www.eraser.io/diagramgpt)
+
+Diagram GPT was used to create my planned ERD using the prompt below
+<!-- TODO: Go through the typings to ensure they are correct - also add a public flag to the User Table -->
+```
+A table called user containing Unique UserID (autoincrementing), username (String), favourite console (String) & favourite game (String)
+A tabled called backlog, containing the UserID from the User table as a foreign key, and a game field (String)
+A table called completed, containing the UserID from the User table as a foreign key, and a game field (String)
+```
+
+<!-- 
+TODO:
+Any other things I end up using
+ -->
+
+### Fonts
+
+###### [*Back to contents*](#contents)
+<!-- TODO:
+#### [FontName](Font URL)
+
+###### [*Back to contents*](#contents) -->
