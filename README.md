@@ -6,7 +6,6 @@ Security
 
 CRUD
 
-
 Project Setup:
 
 Project setup
@@ -45,7 +44,7 @@ EZGif Convertor: https://ezgif.com/
 
 # Video Gaming Tracker
 <!-- TODO: Update to heroku url -->
-## [Link to Live Site](<https://heroku url>)
+## [Link to Live Site](https://video-game-tracker-f52ca7e7c2d0.herokuapp.com)
 
 ## Contents
 <!-- TODO: AI this  -->
@@ -175,6 +174,7 @@ The typography I have used Google Fonts, I have searched on there and imported f
 When a user loads the site, a homepage is displayed, this page has a logo, site title & navbar, along with a brief overview of what is available with and without an account.
 
 ###### [*Back to contents*](#contents)
+
 ### Profiles
 
 A page that is accessible by all, it allows to view all existing users who have marked their profile as public - being accessible without needing to be logged in
@@ -209,7 +209,6 @@ A page showing a form to sign into a created account, allowing users to sign int
 
 A page showing a page with the options to either go to the Home page, or confirm Logging out of the account
 
-
 ### Edit Profile
 
 #### Logged In
@@ -219,7 +218,6 @@ TODO:
 #### Logged Out
 
 A page informing that they must be logged in to edit their profile, provides a pair of buttons that redirect the user to either the Home page, or the Sign In Login Page
-
 
 ## Future Features
 <!-- TODO: -->
@@ -338,7 +336,7 @@ link to github
 <!-- TODO: Add all pages -->
 
 ###### [*Back to contents*](#contents)
- 
+
 ### Validation
 
 ###### [*Back to contents*](#contents)
