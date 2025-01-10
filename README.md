@@ -322,12 +322,9 @@ link to github
 
 ![Heroku Deployment](docs/readme/heroku-deploy.png)
 
-<!-- TODO: Add heroku steps 
 7) Check project deployed as expected
---Need to add some pages/urls.py lines
 
 ![Heroku Deployment Check](docs/readme/heroku-check.png)
--->
 
 ###### [*Back to contents*](#contents)
 

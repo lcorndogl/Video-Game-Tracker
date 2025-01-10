@@ -20,5 +20,7 @@ from profiles.views import view_profiles
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profiles', view_profiles, name='profiles')
+    path('profiles/', view_profiles, name='profiles')
+    # path("", include("profiles.urls"), name="profiles"),
+    
 ]
