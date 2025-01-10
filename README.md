@@ -304,10 +304,29 @@ CoPilot has been used as the AI tool in this project, utilising it for both help
 
 1) Add the required files to the git repository with the command `git add .`
 2) Commit the changes to the repository with the command commit command `git commit -m "Final project commit"`
-<!-- TODO: Add heroku steps 
+
+3) [Create new app on Heroku](https://dashboard.heroku.com/new-app)
+
+![Creating Heroku App](docs/readme/heroku-create-app.png)
+
+4) Connect to GitHub repo
+
+![Github Repository Linking](docs/readme/heroku-github-connect.png)
+
+5) Set Config vars to replicate what is in env.py - heroku-config-vars.png
 link to github
-Config Vars
-deploy
+
+![Heroku Config Vars](docs/readme/heroku-config-vars.png)
+
+6) Manual deploy on heroku - heroku-deploy.png
+
+![Heroku Deployment](docs/readme/heroku-deploy.png)
+
+<!-- TODO: Add heroku steps 
+7) Check project deployed as expected
+--Need to add some pages/urls.py lines
+
+![Heroku Deployment Check](docs/readme/heroku-check.png)
 -->
 
 ###### [*Back to contents*](#contents)
