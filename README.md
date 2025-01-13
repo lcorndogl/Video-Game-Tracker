@@ -421,6 +421,10 @@ A tabled called backlog, containing the UserID from the User table as a foreign 
 A table called completed, containing the UserID from the User table as a foreign key, and a game field (String)
 ```
 
+### Stackoverflow
+
+#### [Undserstanding related_name](https://stackoverflow.com/questions/44160983/what-does-related-name-do)
+
 <!-- 
 TODO:
 Any other things I end up using
