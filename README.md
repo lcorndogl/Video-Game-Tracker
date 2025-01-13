@@ -404,6 +404,11 @@ I have used the content from the Django walkthrough as a guide for creating the 
 ```
 
 ###### [*Back to contents*](#contents)
+
+### [Django Documentation](https://docs.djangoproject.com/en/4.2/)
+
+###### [*Back to contents*](#contents)
+
 <!-- TODO: -->
 <!-- ### [Coolors for the colour scheme](https://coolors.co/ebebeb-c2b8b2-197bbd-090c9b-2a2b2a)
 
@@ -424,6 +429,8 @@ A table called completed, containing the UserID from the User table as a foreign
 ### Stackoverflow
 
 #### [Undserstanding related_name](https://stackoverflow.com/questions/44160983/what-does-related-name-do)
+
+###### [*Back to contents*](#contents)
 
 <!-- 
 TODO:
