@@ -9,6 +9,8 @@ class Favourite(models.Model):
         User, on_delete=models.CASCADE, related_name='favourite')
     platform = models.CharField(max_length=50)
     game = models.CharField(max_length=50)
+    game2 = models.ManyToManyField('Game')
+    platform2 = models.ManyToManyField('Platform')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -41,7 +43,6 @@ class Privacy(models.Model):
 
 class Game(models.Model):
     game = models.CharField(max_length=50)
-    platform = models.ManyToManyField('Platform')
 
     def __str__(self):
         return self.game
