@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Favourites(models.Model):
+class Favourite(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='favourites')
+        User, on_delete=models.CASCADE, related_name='favourite')
     platform = models.CharField(max_length=50)
     game = models.CharField(max_length=50)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -21,7 +21,7 @@ class Library(models.Model):
         User, on_delete=models.CASCADE, related_name='library')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    game2 = models.ManyToManyField('Games')
+    game2 = models.ManyToManyField('Game')
     game = models.CharField(max_length=50)
     platform = models.CharField(max_length=50)
     completed = models.BooleanField(default=False)
@@ -39,15 +39,15 @@ class Privacy(models.Model):
         return self.user.username
 
 
-class Games(models.Model):
+class Game(models.Model):
     game = models.CharField(max_length=50)
-    platform = models.ManyToManyField('Platforms')
+    platform = models.ManyToManyField('Platform')
 
     def __str__(self):
         return self.game
 
 
-class Platforms(models.Model):
+class Platform(models.Model):
     platform = models.CharField(max_length=50)
 
     def __str__(self):
