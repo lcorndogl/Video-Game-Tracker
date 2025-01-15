@@ -9,8 +9,10 @@ class Favourite(models.Model):
         User, on_delete=models.CASCADE, related_name='favourite')
     platform = models.CharField(max_length=50)
     game = models.CharField(max_length=50)
-    game2 = models.ManyToManyField('Game')
-    platform2 = models.ManyToManyField('Platform')
+    game2 = models.ForeignKey(
+        'Game', on_delete=models.PROTECT, blank=True, null=True)
+    platform2 = models.ForeignKey(
+        'Platform', on_delete=models.PROTECT, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
