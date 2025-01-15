@@ -21,6 +21,7 @@ class Library(models.Model):
         User, on_delete=models.CASCADE, related_name='library')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    game2 = models.ManyToManyField('Games')
     game = models.CharField(max_length=50)
     platform = models.CharField(max_length=50)
     completed = models.BooleanField(default=False)
