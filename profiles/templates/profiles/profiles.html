@@ -2,7 +2,51 @@
 {% load static %}
 {% block content %}
 
-<div class="container mt-5">
-    <h1>This is where the user profiles will end up going</h1>
+<!-- profiles.html content starts here -->
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Profiles -->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for profile in profiles %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <a href="#" class="post-link text-center">
+                                <h2 class="card-title">{{ profile.user }}</h2>
+                                <p class="card">Favourite Platform: {{ profile.platform }}</p>
+                                <p class="card">Favourite Game: {{ profile.game }}</p>
+                            </a>
+
+                            <hr />
+                            <p class="card-text text-muted h6 text-center">Last Updated: {{ profile.updated_on}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; PREV</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+    {% endif %}
 </div>
+
+<!-- profile.html content ends here -->
 {% endblock %}

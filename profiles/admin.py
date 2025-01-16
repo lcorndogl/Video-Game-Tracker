@@ -19,6 +19,6 @@ class PlatformAdmin(SummernoteModelAdmin):
     
 @admin.register(Privacy)
 class PrivacyAdmin(SummernoteModelAdmin):
-    list_display = ('privacy',)
+    list_display = ("id",'privacy')
 
 # Register your models here.
