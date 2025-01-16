@@ -40,7 +40,7 @@ def home(request):
 class ProfileList(generic.ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return User_Profile.objects.filter(privacy__lt="3")
+            return User_Profile.objects.filter(privacy__in=["1","3"])
         else:
             return User_Profile.objects.filter(privacy__lt="2")
 

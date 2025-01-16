@@ -15,8 +15,9 @@
                         <div class="card-body">
                             <a href="#" class="post-link text-center">
                                 <h2 class="card-title">{{ profile.user }}</h2>
-                                <p class="card">Favourite Platform: {{ profile.platform }}</p>
-                                <p class="card">Favourite Game: {{ profile.game }}</p>
+                                {% if profile.platform %} <p class="card">Favourite Platform: {{ profile.platform }}</p>
+                                {% endif %}
+                                {% if profile.game %}<p class="card">Favourite Game: {{ profile.game }}</p>{% endif %}
                             </a>
 
                             <hr />
