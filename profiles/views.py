@@ -40,9 +40,9 @@ def home(request):
 class ProfileList(generic.ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return User_Profile.objects.filter(privacy__in=["1","3"])
+            return User_Profile.objects.filter(privacy__in=["1","3"]).order_by("-created_on")
         else:
-            return User_Profile.objects.filter(privacy__lt="2")
+            return User_Profile.objects.filter(privacy__lt="2").order_by("-created_on")
 
     context_object_name = 'profiles'
     template_name = "profiles/profiles.html"
