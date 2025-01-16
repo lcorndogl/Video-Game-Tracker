@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User_Profile, Game, Platform, Privacy
+from .models import User_Profile, Game, Platform, Privacy, User_Library
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -20,5 +20,10 @@ class PlatformAdmin(SummernoteModelAdmin):
 @admin.register(Privacy)
 class PrivacyAdmin(SummernoteModelAdmin):
     list_display = ("id",'privacy')
+
+@admin.register(User_Library)
+class LibraryAdmin(SummernoteModelAdmin):
+    list_display = ("id",'user', 'created_on', 'updated_on', 'completed')
+
 
 # Register your models here.

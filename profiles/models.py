@@ -44,7 +44,7 @@ class User_Library(models.Model):
         User, on_delete=models.CASCADE, related_name='library')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    game = models.ManyToManyField('Game')
+    game = models.ForeignKey(Game, on_delete=models.PROTECT)
     platform = models.ManyToManyField('Platform')
     completed = models.BooleanField(default=False)
 
