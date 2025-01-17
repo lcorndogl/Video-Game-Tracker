@@ -23,7 +23,7 @@ class PrivacyAdmin(SummernoteModelAdmin):
 
 @admin.register(User_Library)
 class LibraryAdmin(SummernoteModelAdmin):
-    list_display = ("id",'user', 'created_on', 'updated_on', 'completed')
+    list_display = ("id", 'game', 'user', 'created_on', 'updated_on', 'completed')
 
 
 # Register your models here.
