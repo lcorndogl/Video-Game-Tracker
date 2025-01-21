@@ -58,11 +58,15 @@ def profile_detailed(request, username):
     user = get_object_or_404(User, username=username)
     profile = get_object_or_404(User_Profile, user=user)
     library = User_Library.objects.filter(user=user)
+    backlog = library.filter(completed=False)
+    completed = library.filter(completed=True)
     print('profile', profile)
     context = {
         "user_identified": user,
         "profile": profile,
         "library": library,
+        "backlog": backlog,
+        "completed": completed
     }
 
     return render(
