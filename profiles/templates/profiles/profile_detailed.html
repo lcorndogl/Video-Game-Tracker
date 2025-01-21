@@ -47,12 +47,16 @@
                 </div>
                 {% endif %}
 
+                {% if completed %}
                 <div class="card mb-4 col12 col-md-5 text-center mx-auto">
                     <h2 class="card-title">Completed</h2>
                     {% for game in completed %}
                     <p>{{ game.game }}</p>
                     {% endfor %}
                 </div>
+                {% endif %}
+
+                
             </div>
         </div>
     </div>
