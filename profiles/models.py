@@ -33,7 +33,8 @@ class User_Profile(models.Model):
         'Platform', on_delete=models.PROTECT, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    privacy = models.ForeignKey('Privacy', on_delete=models.PROTECT, related_name='User_Privacy')
+    privacy = models.ForeignKey('Privacy', on_delete=models.PROTECT,
+                                related_name='User_Privacy')
 
     def __str__(self):
         return self.user.username
@@ -50,6 +51,3 @@ class User_Library(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-

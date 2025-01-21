@@ -9,9 +9,18 @@ def manage_profile(request):
     Renders the profiles page
     Shows users who have their visibility matching to the users logged in status
     """
+    user = get_object_or_404(User, username=request.user)
+    profile = get_object_or_404(User_Profile, user=user)
+    library = User_Library.objects.filter(user=user)
+    context = {
+        "library": library,
+        "profile": profile,
+
+    }
     return render(
         request,
         "profiles/manage.html",
+        context,
     )
 
 

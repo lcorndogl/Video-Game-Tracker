@@ -41,8 +41,8 @@
                 {% if backlog %}
                 <div class="card mb-4 col12 col-md-5 text-center mx-auto">
                     <h2 class="card-title">Backlog</h2>
-                    {% for game in backlog %}
-                    <p>{{ game.game }}</p>
+                    {% for entry in backlog %}
+                    <p>{{ entry.game }}</p>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -50,8 +50,8 @@
                 {% if completed %}
                 <div class="card mb-4 col12 col-md-5 text-center mx-auto">
                     <h2 class="card-title">Completed</h2>
-                    {% for game in completed %}
-                    <p>{{ game.game }}</p>
+                    {% for entry in completed %}
+                    <p>{{ entry.game }}</p>
                     {% endfor %}
                 </div>
                 {% endif %}

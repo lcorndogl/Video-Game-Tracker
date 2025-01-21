@@ -2,7 +2,65 @@
 {% load static %}
 {% block content %}
 
-<div class="container mt-5">
-    <h1>This is where the user can edit their profile settings</h1>
+<!-- profile_detailed.html content starts here -->
+<div class="container-fluid">
+
+    <div class="row">
+        <!-- Profile -->
+        <div class="col-12 mt-3 left">
+            {% if not user.is_authenticated %}
+            <h1>ERROR: You must be logged in to modify your profile</h1>
+            {% else %}
+            <div class="row justify-content-center">
+                <div class="col-md-4 text-center">
+                    <h1>{{ user }}</h1>
+                    <hr>
+                    <!-- Checks if the user has a favourite game or platform -->
+                    <p class="text-muted>">
+                    <table class="table">
+                        <tr>
+                            <!-- Define table headings based on the user's favourite game or platform -->
+                            {% if profile.game %}
+                            <th>Favourite Game</th>
+                            {% endif %}{% if profile.platform %}
+                            <th>Favourite Platform</th>
+                            {% endif %}
+                        </tr>
+                        <!-- Display favourites  -->
+                        <tr> {% if profile.game %}
+
+                            <td>{{ profile.game }}</td>{% endif %}{% if profile.platform %}
+
+                            <td>{{ profile.platform }}</td>
+                            {% endif %}
+
+                        </tr>
+                    </table>
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <!-- Library Info -->
+                {% if library %}
+                <div class="card mb-4 col12 col-md-5 text-center mx-auto">
+                    <h2 class="card-title">Library</h2>
+                    <table class="table">
+                        <tr>
+                            <th>Game</th>
+                            <th>Completed</th>
+                        </tr>
+                    {% for entry in library %}
+                    <tr>
+                    <td>{{entry.game}}</td><td>{{ entry.completed }}</td></tr>
+                    {% endfor %}
+                </div>
+            </table>
+                {% endif %}
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
+<!-- profile_detailed.html content ends here -->
 {% endblock %}
