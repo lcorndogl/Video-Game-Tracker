@@ -13,33 +13,38 @@
                 <div class="col-md-4 text-center">
                     <h1>{{ user_identified }}</h1>
                     <hr>
-                    <p class="text-muted>">{% if profile.game %}
-                        <table class="table">
-                        {% if profile.game or profile.platform %}
+                    <!-- Checks if the user has a favourite game or platform -->
+                    <p class="text-muted>">{% if profile.game or profile.platform%}
+                    <table class="table">
                         <tr>
+                            <!-- Define table headings based on the user's favourite game or platform -->
                             {% if profile.game %}
                             <th>Favourite Game</th>
                             {% endif %}
                             {% if profile.platform %}
                             <th>Favourite Platform</th>
-                            {% endif %} </tr>
-                                <tr>{% if profile.game %}
-                                <td>{{ profile.game }}</td>
-                                {% endif %}
-                                {% if profile.platform %}
-                                <td>{{ profile.platform }}</td>
-                                {% endif %}</tr>
+                            {% endif %}
+                        </tr>
+                        <!-- Display favourites  -->
+                        <tr>{% if profile.game %}
+                            <td>{{ profile.game }}</td>
+                            {% endif %}
+                            {% if profile.platform %}
+                            <td>{{ profile.platform }}</td>
+                            {% endif %}
+                        </tr>
                     </table>
                     {% endif %}</p>
-                    Favourite Game: {{ profile.game }}{% endif %}&emsp; {% if profile.platform %}Favourite Platform: {{ profile.platform }}{% endif %}</p>
                 </div>
+            </div>
+            <div class="row">
                 <!-- Library Info -->
-                {% for profile in profiles %}
+                {% for game in library %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
                             <a href="#" class="post-link text-center">
-                                <h2 class="card-title">{{ profile.user }}</h2>
+                                <h2 class="card-title">{{ game.game }} {{ game.completed }}</h2>
                                 {% if profile.platform %} <p class="card">Favourite Platform: {{ profile.platform }}</p>
                                 {% endif %}
                                 {% if profile.game %}<p class="card">Favourite Game: {{ profile.game }}</p>{% endif %}

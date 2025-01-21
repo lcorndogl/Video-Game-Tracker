@@ -57,20 +57,16 @@ def profile_detailed(request, username):
     # queryset = User.objects.filter(username=username).values()
     user = get_object_or_404(User, username=username)
     profile = get_object_or_404(User_Profile, user=user)
+    library = User_Library.objects.filter(user=user)
     print('profile', profile)
     context = {
         "user_identified": user,
         "profile": profile,
+        "library": library,
     }
 
     return render(
         request,
         "profiles/profile_detailed.html",
         context
-        # {"user": User},
     )
-
-# class ProfileDetail(generic.ListView):
-
-#     def get_queryset(self):
-#         return User.objects.filter(username=self.kwargs['User'])
