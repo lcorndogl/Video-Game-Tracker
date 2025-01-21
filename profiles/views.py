@@ -122,7 +122,6 @@ def comment_edit(request, comment_id):
     if request.method == "POST":
 
         user = get_object_or_404(User, username=request.user)
-        profile = get_object_or_404(User_Profile, user=user)
         comment = get_object_or_404(Comment, pk=comment_id)
         comment_form = CommentForm(data=request.POST, instance=comment)
 
