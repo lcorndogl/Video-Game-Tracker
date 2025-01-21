@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User_Profile, Game, Platform, Privacy, User_Library
+from .models import User_Profile, Game, Platform, Privacy, User_Library, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -27,3 +27,4 @@ class LibraryAdmin(SummernoteModelAdmin):
 
 
 # Register your models here.
+admin.site.register(Comment)

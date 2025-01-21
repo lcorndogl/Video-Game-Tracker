@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+STATUS = ((0, "Draft"), (1, "Published"))
+
+
 # Create your models here.
 
 class Privacy(models.Model):
@@ -51,3 +54,23 @@ class User_Library(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Comment(models.Model):
+    """
+    Stores a single comment related to :model:`auth.User`.
+    and :model:`blog.Post`.
+    """
+    profile = models.ForeignKey(User_Profile, on_delete=models.CASCADE,
+                                related_name="comments")
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE,
+                                  related_name="commenter")
+    body = models.TextField()
+    approved = models.IntegerField(choices=STATUS, default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return f"Comment {self.body} by {self.commenter}"

@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
+from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import User_Profile, User_Library, User
-
+from .models import User_Profile, User_Library, User, Comment
+from .forms import CommentForm
 
 def manage_profile(request):
     """
@@ -10,7 +11,7 @@ def manage_profile(request):
     Shows users who have their visibility matching to the users logged in status
     """
     user = get_object_or_404(User, username=request.user)
-    profile = get_object_or_404(User_Profile, user=user)
+    profile = get_object_or_404(User_Profile, request)
     library = User_Library.objects.filter(user=user)
     context = {
         "library": library,
@@ -67,17 +68,71 @@ def profile_detailed(request, username):
     library = User_Library.objects.filter(user=user)
     backlog = library.filter(completed=False)
     completed = library.filter(completed=True)
+    
+    comments = profile.comments.all().order_by("-created_on")
+    comment_count = profile.comments.filter(approved=True).count()
+    if request.method == "POST":
+        print("Received a POST request")
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.commenter = request.user
+            comment.profile = profile
+            comment.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
+
+    comment_form = CommentForm()
+
+    print("About to render template")
     print('profile', profile)
     context = {
         "user_identified": user,
-        "profile": profile,
         "library": library,
         "backlog": backlog,
-        "completed": completed
+        "completed": completed,
+        "profile": profile,
+        "comment_form": comment_form,
+        "comments": comments,
     }
 
     return render(
         request,
         "profiles/profile_detailed.html",
-        context
+        context,
     )
+
+
+# def favourite_edit(request, slug, comment_id):
+#     """
+#     Display an individual comment for edit.
+
+#     **Context**
+
+#     ``post``
+#         An instance of :model:`blog.Post`.
+#     ``comment``
+#         A single comment related to the post.
+#     ``comment_form``
+#         An instance of :form:`blog.CommentForm`.
+#     """
+#     if request.method == "POST":
+
+#         queryset = Post.objects.filter(status=1)
+#         post = get_object_or_404(queryset, slug=slug)
+#         comment = get_object_or_404(Comment, pk=comment_id)
+#         comment_form = CommentForm(data=request.POST, instance=comment)
+
+#         if comment_form.is_valid() and comment.author == request.user:
+#             comment = comment_form.save(commit=False)
+#             comment.post = post
+#             comment.approved = False
+#             comment.save()
+#             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+#         else:
+#             messages.add_message(request, messages.ERROR,
+#                                 'Error updating comment!')
+
+#     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
