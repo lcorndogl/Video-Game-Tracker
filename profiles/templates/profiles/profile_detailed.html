@@ -4,56 +4,59 @@
 
 <!-- profile_detailed.html content starts here -->
 <div class="container-fluid">
-    <br><br><br>
-    Detailed User should show here:
-    {{ user_identified }}
-    <hr>
-    {{ profile.game }}
+
     <div class="row">
         <br><br>Some placeholder text
-        <p>potatos are great</p>
-        <!-- Profiles -->
-        <!-- <div class="col-12 mt-3 left">
-        <div class="row">
-            {% for profile in profiles %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <a href="#" class="post-link text-center">
-                            <h2 class="card-title">{{ profile.user }}</h2>
-                            {% if profile.platform %} <p class="card">Favourite Platform: {{ profile.platform }}</p>
+        <!-- Profile -->
+        <div class="col-12 mt-3 left">
+            <div class="row justify-content-center">
+                <div class="col-md-4 text-center">
+                    <h1>{{ user_identified }}</h1>
+                    <hr>
+                    <p class="text-muted>">{% if profile.game %}
+                        <table class="table">
+                        {% if profile.game or profile.platform %}
+                        <tr>
+                            {% if profile.game %}
+                            <th>Favourite Game</th>
                             {% endif %}
-                            {% if profile.game %}<p class="card">Favourite Game: {{ profile.game }}</p>{% endif %}
-                        </a>
+                            {% if profile.platform %}
+                            <th>Favourite Platform</th>
+                            {% endif %} </tr>
+                                <tr>{% if profile.game %}
+                                <td>{{ profile.game }}</td>
+                                {% endif %}
+                                {% if profile.platform %}
+                                <td>{{ profile.platform }}</td>
+                                {% endif %}</tr>
+                    </table>
+                    {% endif %}</p>
+                    Favourite Game: {{ profile.game }}{% endif %}&emsp; {% if profile.platform %}Favourite Platform: {{ profile.platform }}{% endif %}</p>
+                </div>
+                <!-- Library Info -->
+                {% for profile in profiles %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <a href="#" class="post-link text-center">
+                                <h2 class="card-title">{{ profile.user }}</h2>
+                                {% if profile.platform %} <p class="card">Favourite Platform: {{ profile.platform }}</p>
+                                {% endif %}
+                                {% if profile.game %}<p class="card">Favourite Game: {{ profile.game }}</p>{% endif %}
+                            </a>
 
-                        <hr />
-                        <p class="card-text text-muted h6 text-center">Last Updated: {{ profile.updated_on}}
-                        </p>
+                            <hr />
+                            <p class="card-text text-muted h6 text-center">Last Updated: {{ profile.updated_on}}
+                            </p>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% if forloop.counter|divisibleby:3 %}
-        </div>
-        <div class="row">
-            {% endif %}
-            {% endfor %}
         </div>
     </div>
+
 </div>
-{% if is_paginated %}
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; PREV</a></li>
-        {% endif %}
-        {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-        {% endif %}
 
-    </ul>
-</nav>
-{% endif %} -->
-    </div>
-
-    <!-- profile_detailed.html content ends here -->
+<!-- profile_detailed.html content ends here -->
 {% endblock %}
