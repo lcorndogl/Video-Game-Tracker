@@ -38,12 +38,15 @@
             </div>
             <div class="row justify-content-center">
                 <!-- Library Info -->
+                {% if backlog %}
                 <div class="card mb-4 col12 col-md-5 text-center mx-auto">
                     <h2 class="card-title">Backlog</h2>
                     {% for game in backlog %}
                     <p>{{ game.game }}</p>
                     {% endfor %}
                 </div>
+                {% endif %}
+
                 <div class="card mb-4 col12 col-md-5 text-center mx-auto">
                     <h2 class="card-title">Completed</h2>
                     {% for game in completed %}
@@ -54,8 +57,5 @@
         </div>
     </div>
 </div>
-
-</div>
-
 <!-- profile_detailed.html content ends here -->
 {% endblock %}

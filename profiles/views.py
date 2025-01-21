@@ -37,8 +37,6 @@ class ProfileList(generic.ListView):
     template_name = "profiles/profiles.html"
     paginate_by = 4
 
-# class ProfileDetail(generic.DetailView):
-
 
 def profile_detailed(request, username):
     """
