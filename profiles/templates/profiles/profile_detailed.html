@@ -66,7 +66,7 @@
     <div class="row">
         <div class="col-12">
             <strong class="text-secondary">
-                <i class="far fa-comments"></i> {{ comment_count }}
+                <i class="far fa-comments"></i> Total Comments: {{ comment_count }}
             </strong>
         </div>
         <div class="col-12">
@@ -85,7 +85,7 @@
             {% if not comment.approved and comment.author == user %}
             faded{% elif not comment.approved %} d-none{% endif %}">
                     <p class="font-weight-bold">
-                        {{ comment.author }}
+                        {{ comment.commenter }}
                         <span class="font-weight-normal">
                             {{ comment.created_on }}
                         </span> wrote:
@@ -93,12 +93,12 @@
                     <div id="comment{{ comment.id }}">
                         {{ comment.body | linebreaks }}
                     </div>
-                    {% if not comment.approved and comment.author == user %}
+                    {% if not comment.approved and comment.commenter == user %}
                     <p class="approval">
                         This comment is awaiting approval
                     </p>
                     {% endif %}
-                    {% if user.is_authenticated and comment.author == user %}
+                    {% if user.is_authenticated and comment.commenter == user %}
                     <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
                     <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
                     {% endif %}
@@ -147,4 +147,7 @@
 </div>
 </div>
 <!-- profile_detailed.html content ends here -->
+{% block extras %}
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
 {% endblock %}

@@ -68,7 +68,7 @@ def profile_detailed(request, username):
     library = User_Library.objects.filter(user=user)
     backlog = library.filter(completed=False)
     completed = library.filter(completed=True)
-    
+
     comments = profile.comments.all().order_by("-created_on")
     comment_count = profile.comments.filter(approved=True).count()
     if request.method == "POST":
@@ -81,7 +81,7 @@ def profile_detailed(request, username):
             comment.save()
             messages.add_message(
                 request, messages.SUCCESS,
-                'Comment submitted and awaiting approval'
+                'Comment Added!'
             )
 
     comment_form = CommentForm()
@@ -96,6 +96,7 @@ def profile_detailed(request, username):
         "profile": profile,
         "comment_form": comment_form,
         "comments": comments,
+        "comment_count": comment_count,
     }
 
     return render(
@@ -104,6 +105,38 @@ def profile_detailed(request, username):
         context,
     )
 
+
+def comment_edit(request, comment_id):
+    """
+    Display an individual comment for edit.
+
+    **Context**
+
+    ``post``
+        An instance of :model:`blog.Post`.
+    ``comment``
+        A single comment related to the post.
+    ``comment_form``
+        An instance of :form:`blog.CommentForm`.
+    """
+    if request.method == "POST":
+
+        user = get_object_or_404(User, username=request.user)
+        profile = get_object_or_404(User_Profile, user=user)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.commenter == request.user:
+            comment = comment_form.save(commit=False)
+            comment.commenter = user
+            comment.approved = True
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+        else:
+            messages.add_message(request, messages.ERROR,
+                                'Error updating comment!')
+
+    return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
 
 # def favourite_edit(request, slug, comment_id):
 #     """
