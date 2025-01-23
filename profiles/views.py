@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import User_Profile, User_Library, User, Comment
+from .models import User_Profile, User_Library, User, Comment, Privacy
 from .forms import CommentForm
 
 
@@ -12,7 +12,11 @@ def manage_profile(request):
     Shows users who have their visibility matching to the users logged in status
     """
     user = get_object_or_404(User, username=request.user)
-    profile = get_object_or_404(User_Profile, request)
+    # add if statement here to create User_Profile if it doesn't exist?
+    if not User_Profile.objects.filter(user=user).exists():
+        privacy = Privacy.objects.get(privacy="Private")
+        User_Profile.objects.create(user=user, privacy=privacy)
+    profile = get_object_or_404(User_Profile, user=user)
     library = User_Library.objects.filter(user=user)
     context = {
         "library": library,
@@ -145,6 +149,8 @@ def comment_delete(request, comment_id):
     ``comment``
         A single comment related to the post.
     """
+
+    # user = get_object_or_404(User, username=request.user)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.commenter == request.user:
@@ -154,7 +160,7 @@ def comment_delete(request, comment_id):
         messages.add_message(request, messages.ERROR,
                              'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
 
 # def favourite_edit(request, slug, comment_id):
 #     """
