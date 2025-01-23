@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import User_Profile, User_Library, User, Comment
 from .forms import CommentForm
 
+
 def manage_profile(request):
     """
     Renders the profiles page
@@ -51,14 +52,10 @@ class ProfileList(generic.ListView):
 def profile_detailed(request, username):
     """
     Display an individual :model:`blog.Post`.
-
     **Context**
-
     ``post``
         An instance of :model:`blog.Post`.
-
     **Template:**
-
     :template:`blog/post_detail.html`
     """
 
@@ -133,9 +130,31 @@ def comment_edit(request, comment_id):
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
         else:
             messages.add_message(request, messages.ERROR,
-                                'Error updating comment!')
+                                 'Error updating comment!')
 
     return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
+
+
+def comment_delete(request, comment_id):
+    """
+    Delete an individual comment.
+
+    **Context**
+    ``post``
+        An instance of :model:`blog.Post`.
+    ``comment``
+        A single comment related to the post.
+    """
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.commenter == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(request, messages.ERROR,
+                             'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 # def favourite_edit(request, slug, comment_id):
 #     """
