@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, User_Profile, User_Library, Privacy
+from .models import Comment, User_Profile, Privacy
 
 
 class CommentForm(forms.ModelForm):

@@ -19,75 +19,60 @@
 
                     <div class="card mb-4 mt-3">
                         <div class="card-body">
-                            <h3>Modifying Favourites:</h3>
-                            <form id="favouritesForm" method="post" style="margin-top: 1.3em;">
+                            <h3>Modifying Profile:</h3>
+                            <form id="profileForm" method="post" style="margin-top: 1.3em;">
                                 {{ favourites_form | crispy }}
                                 {% csrf_token %}
+                                <table class="table">
+                                    <tr>
+                                        <th>Game</th>
+                                        <th>Completed</th>
+                                    </tr>
+                                    {% for entry in library %}
+                                    <tr>
+                                        <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name: {{ entry.game }}</label></td>
+                                        <td><input type="checkbox" id="entry_{{ entry.id }}" name="entry_{{ entry.id }}" value="True" {% if entry.completed %} checked {% endif %}></td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
                                 <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
                             </form>
                         </div>
                     </div>
 
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <!-- Library Info -->
-                {% if library %}
 
-                <div class="col-md-8 card mb-4  mt-3 ">
-                    <h3>Library:</h3>
-                    <div class="card-body">
-                        <!-- We want a for loop inside the empty control tags
-                    to iterate through each comment in comments -->
-                    <table class="table">
-                        <tr>
-                            <th>Game</th>
-                            <th>Completed</th>
-                        </tr>
-                        {% for entry in library %}
-                        <tr>
-                            <td>{{entry.id}}</td>
-                            <td>{{entry.game}}</td>
-                            <td>{{ entry.completed }}</td>
-                        </tr>
-                        {% endfor %}
-                </div>
-                </table>
-
-
-                        {% for comment in comments %}
-                        <div class="p-2 comments
+                    <!-- {% for comment in comments %}
+                    <div class="p-2 comments
                     {% if not comment.approved and comment.author == user %}
                     faded{% elif not comment.approved %} d-none{% endif %}">
-                            <p class="font-weight-bold">
-                                {{ comment.commenter }}
-                                <span class="font-weight-normal">
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            <div id="comment{{ comment.id }}">
-                                {{ comment.body | linebreaks }}
-                            </div>
-                            {% if not comment.approved and comment.commenter == user %}
-                            <p class="approval">
-                                This comment is awaiting approval
-                            </p>
-                            {% endif %}
-                            {% if user.is_authenticated and comment.commenter == user %}
-                            <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-                            <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
-                            {% endif %}
+                        <p class="font-weight-bold">
+                            {{ comment.commenter }}
+                            <span class="font-weight-normal">
+                                {{ comment.created_on }}
+                            </span> wrote:
+                        </p>
+                        <div id="comment{{ comment.id }}">
+                            {{ comment.body | linebreaks }}
                         </div>
-                        <!-- Our for loop ends here -->
-                        {% endfor %}
+                        {% if not comment.approved and comment.commenter == user %}
+                        <p class="approval">
+                            This comment is awaiting approval
+                        </p>
+                        {% endif %}
+                        {% if user.is_authenticated and comment.commenter == user %}
+                        <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+                        <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+                        {% endif %}
                     </div>
+                    <!-- Our for loop ends here -->
+                    {% endfor %} -->
                 </div>
-                {% endif %}
-
             </div>
             {% endif %}
+
         </div>
     </div>
+</div>
 </div>
 <!-- profile_detailed.html content ends here -->
 {% endblock %}

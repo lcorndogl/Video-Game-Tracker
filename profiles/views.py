@@ -55,13 +55,16 @@ def manage_profile(request):
         favourites_form = FavouritesForm(data=request.POST, instance=profile)
         if favourites_form.is_valid():
             favourites_form.save()
+            for entry in library:
+                entry_id = f"entry_{entry.id}"
+                entry.completed = entry_id in request.POST
+                entry.save()
             messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
         else:
             messages.add_message(request, messages.ERROR,
                                  'Error updating profile!')
     else:
         favourites_form = FavouritesForm(instance=profile)
-
 
     context = {
         "library": library,
