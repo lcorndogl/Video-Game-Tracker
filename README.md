@@ -372,14 +372,14 @@ link to github
 
 #### Codestar Walkthrough Blog
 
-I have used the content from the Django walkthrough as a guide for creating the project, including it's apps, to have a guide on where to start with the ability to change field names to amend the functionality from a blog post to being a video game tracker!
+I have used the content from the Django walkthrough as a guide for creating the project, including it's apps, to have a guide on where to start with the ability to change field names to amend the functionality from a blog post to being a video game tracker! I have also used the comment section of the blog to implement comments onto user profiles, as well as used this as a basis for my other models to achieve CRUD functionality in other areas of the site - primarily the "Edit Profile" page
 
 #### [Postgres Database](#postgres)
 
 ###### [*Back to contents*](#contents)
 
-#### Javascript code used to collapse navbar when a link is clicked
-
+<!-- #### Javascript code used to collapse navbar when a link is clicked
+TODO: Implement?!?
 ```javascript
 <script>
     document
@@ -403,7 +403,7 @@ I have used the content from the Django walkthrough as a guide for creating the 
 </script>
 ```
 
-###### [*Back to contents*](#contents)
+###### [*Back to contents*](#contents) -->
 
 ### [Django Documentation](https://docs.djangoproject.com/en/4.2/)
 
@@ -429,6 +429,12 @@ A table called completed, containing the UserID from the User table as a foreign
 ### Stackoverflow
 
 #### [Undserstanding related_name](https://stackoverflow.com/questions/44160983/what-does-related-name-do)
+
+###### [*Back to contents*](#contents)
+
+### W3 Schools
+
+#### [Refresher on Forms (Checkboxes)](https://www.w3schools.com/tags/att_input_type_checkbox.asp)
 
 ###### [*Back to contents*](#contents)
 
