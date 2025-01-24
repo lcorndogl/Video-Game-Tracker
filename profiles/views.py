@@ -62,25 +62,6 @@ def manage_profile(request):
     else:
         favourites_form = FavouritesForm(instance=profile)
 
-    # favourites_form = FavouritesForm(data=request.POST)
-    # if request.method == "POST":
-    #     print("Received a POST request")
-    #     favourites_form = FavouritesForm(data=request.POST)
-    #     if favourites_form.is_valid():
-    #         print("Form is valid")
-    #         library, created = Library.objects.get_or_create(user=user)
-    #     library.favourites = favourites_form.cleaned_data['favourites']
-    #     library.save()
-    #     messages.add_message(
-    #         request, messages.SUCCESS,
-    #         'Favourites Updated!'
-    #     )
-    # else:
-    #     print("Form is invalid")
-    #     messages.add_message(
-    #         request, messages.ERROR,
-    #         'Error updating favourites!'
-    #     )
 
     context = {
         "library": library,

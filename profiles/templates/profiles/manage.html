@@ -28,47 +28,60 @@
                         </div>
                     </div>
 
-                    
-                    <!-- Checks if the user has a favourite game or platform -->
-                    <p class="text-muted>">
-                    <table class="table">
-                        <tr>
-                            <!-- Define table headings based on the user's favourite game or platform -->
-                            {% if profile.game %}
-                            <th>Favourite Game</th>
-                            {% endif %}{% if profile.platform %}
-                            <th>Favourite Platform</th>
-                            {% endif %}
-                        </tr>
-                        <!-- Display favourites  -->
-                        <tr> {% if profile.game %}
-
-                            <td>{{ profile.game }}</td>{% endif %}{% if profile.platform %}
-
-                            <td>{{ profile.platform }}</td>
-                            {% endif %}
-
-                        </tr>
-                    </table>
-                    </p>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <!-- Library Info -->
                 {% if library %}
-                <div class="card mb-4 col12 col-md-5 text-center mx-auto">
-                    <h2 class="card-title">Library</h2>
+
+                <div class="col-md-8 card mb-4  mt-3 ">
+                    <h3>Library:</h3>
+                    <div class="card-body">
+                        <!-- We want a for loop inside the empty control tags
+                    to iterate through each comment in comments -->
                     <table class="table">
                         <tr>
                             <th>Game</th>
                             <th>Completed</th>
                         </tr>
-                    {% for entry in library %}
-                    <tr>
-                    <td>{{entry.game}}</td><td>{{ entry.completed }}</td></tr>
-                    {% endfor %}
+                        {% for entry in library %}
+                        <tr>
+                            <td>{{entry.id}}</td>
+                            <td>{{entry.game}}</td>
+                            <td>{{ entry.completed }}</td>
+                        </tr>
+                        {% endfor %}
                 </div>
-            </table>
+                </table>
+
+
+                        {% for comment in comments %}
+                        <div class="p-2 comments
+                    {% if not comment.approved and comment.author == user %}
+                    faded{% elif not comment.approved %} d-none{% endif %}">
+                            <p class="font-weight-bold">
+                                {{ comment.commenter }}
+                                <span class="font-weight-normal">
+                                    {{ comment.created_on }}
+                                </span> wrote:
+                            </p>
+                            <div id="comment{{ comment.id }}">
+                                {{ comment.body | linebreaks }}
+                            </div>
+                            {% if not comment.approved and comment.commenter == user %}
+                            <p class="approval">
+                                This comment is awaiting approval
+                            </p>
+                            {% endif %}
+                            {% if user.is_authenticated and comment.commenter == user %}
+                            <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+                            <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+                            {% endif %}
+                        </div>
+                        <!-- Our for loop ends here -->
+                        {% endfor %}
+                    </div>
+                </div>
                 {% endif %}
 
             </div>

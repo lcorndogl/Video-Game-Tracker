@@ -15,3 +15,4 @@ class FavouritesForm(forms.ModelForm):
     class Meta:
         model = User_Profile
         fields = ('game', 'platform', 'privacy')
+
