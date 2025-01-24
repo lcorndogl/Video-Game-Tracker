@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!-- profile_detailed.html content starts here -->
@@ -12,9 +13,22 @@
             <h1>ERROR: You must be logged in to modify your profile</h1>
             {% else %}
             <div class="row justify-content-center">
-                <div class="col-md-4 text-center">
-                    <h1>{{ user }}</h1>
+                <div class="col-md-12 text-center">
+                    <h1>Modifying Profile: {{ user }}</h1>
                     <hr>
+
+                    <div class="card mb-4 mt-3">
+                        <div class="card-body">
+                            <h3>Modifying Favourites:</h3>
+                            <form id="favouritesForm" method="post" style="margin-top: 1.3em;">
+                                {{ favourites_form | crispy }}
+                                {% csrf_token %}
+                                <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    
                     <!-- Checks if the user has a favourite game or platform -->
                     <p class="text-muted>">
                     <table class="table">
@@ -63,4 +77,8 @@
     </div>
 </div>
 <!-- profile_detailed.html content ends here -->
+{% endblock %}
+{% block extras %}
+<script src="{% static 'js/favourites.js' %}"></script>
+<script src="{% static 'js/library.js' %}"></script>
 {% endblock %}

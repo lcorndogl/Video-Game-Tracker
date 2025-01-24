@@ -3,7 +3,39 @@ from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import User_Profile, User_Library, User, Comment, Privacy
-from .forms import CommentForm
+from .forms import CommentForm, FavouritesForm
+
+
+# def comment_edit(request, comment_id):
+#     """
+#     Display an individual comment for edit.
+
+#     **Context**
+
+#     ``post``
+#         An instance of :model:`blog.Post`.
+#     ``comment``
+#         A single comment related to the post.
+#     ``comment_form``
+#         An instance of :form:`blog.CommentForm`.
+#     """
+#     if request.method == "POST":
+
+#         user = get_object_or_404(User, username=request.user)
+#         comment = get_object_or_404(Comment, pk=comment_id)
+#         comment_form = CommentForm(data=request.POST, instance=comment)
+
+#         if comment_form.is_valid() and comment.commenter == request.user:
+#             comment = comment_form.save(commit=False)
+#             comment.commenter = user
+#             comment.approved = True
+#             comment.save()
+#             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+#         else:
+#             messages.add_message(request, messages.ERROR,
+#                                  'Error updating comment!')
+
+#     return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
 
 
 def manage_profile(request):
@@ -18,9 +50,44 @@ def manage_profile(request):
         User_Profile.objects.create(user=user, privacy=privacy)
     profile = get_object_or_404(User_Profile, user=user)
     library = User_Library.objects.filter(user=user)
+
+    if request.method == "POST":
+        favourites_form = FavouritesForm(data=request.POST, instance=profile)
+        if favourites_form.is_valid():
+            favourites_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating profile!')
+    else:
+        favourites_form = FavouritesForm(instance=profile)
+
+    
+    
+    
+    # favourites_form = FavouritesForm(data=request.POST)
+    # if request.method == "POST":
+    #     print("Received a POST request")
+    #     favourites_form = FavouritesForm(data=request.POST)
+    #     if favourites_form.is_valid():
+    #         print("Form is valid")
+    #         library, created = Library.objects.get_or_create(user=user)
+    #     library.favourites = favourites_form.cleaned_data['favourites']
+    #     library.save()
+    #     messages.add_message(
+    #         request, messages.SUCCESS,
+    #         'Favourites Updated!'
+    #     )
+    # else:
+    #     print("Form is invalid")
+    #     messages.add_message(
+    #         request, messages.ERROR,
+    #         'Error updating favourites!'
+    #     )
+
     context = {
         "library": library,
         "profile": profile,
+        "favourites_form": favourites_form,
 
     }
     return render(
