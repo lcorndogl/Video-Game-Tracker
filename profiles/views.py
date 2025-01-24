@@ -57,13 +57,11 @@ def manage_profile(request):
             favourites_form.save()
             messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating profile!')
+            messages.add_message(request, messages.ERROR,
+                                 'Error updating profile!')
     else:
         favourites_form = FavouritesForm(instance=profile)
 
-    
-    
-    
     # favourites_form = FavouritesForm(data=request.POST)
     # if request.method == "POST":
     #     print("Received a POST request")
@@ -117,7 +115,7 @@ class ProfileList(generic.ListView):
 
     context_object_name = 'profiles'
     template_name = "profiles/profiles.html"
-    paginate_by = 4
+    paginate_by = 6
 
 
 def profile_detailed(request, username):
