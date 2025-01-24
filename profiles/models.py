@@ -7,7 +7,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 # Create your models here.
 
 class Privacy(models.Model):
-    privacy = models.CharField(max_length=50)
+    privacy = models.CharField(max_length=50, blank=False, null=False)
 
     def __str__(self):
         return self.privacy
