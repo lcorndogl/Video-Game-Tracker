@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -75,7 +75,14 @@ def manage_profile(request):
                 messages.add_message(request, messages.SUCCESS, 'Game added to library!')
             else:
                 messages.add_message(request, messages.ERROR, 'Error adding game to library!')
-
+        else:
+            for entry in library:
+                if f"remove_game_{entry.id}" in request.POST:
+                    entry.delete()
+                    messages.add_message(request, messages.SUCCESS, 'Game removed from library!')
+                    return redirect('manage')
+            favourites_form = FavouritesForm(instance=profile)
+            add_game_form = AddGameForm()
     context = {
         "library": library,
         "profile": profile,

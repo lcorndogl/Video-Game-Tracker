@@ -33,11 +33,18 @@
                                     <tr>
                                         <th>Game</th>
                                         <th>Completed</th>
+                                        <th>Remove</th>
                                     </tr>
                                     {% for entry in library %}
                                     <tr>
-                                        <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name: {{ entry.game }}</label></td>
-                                        <td><input type="checkbox" id="entry_{{ entry.id }}" name="entry_{{ entry.id }}" value="True" {% if entry.completed %} checked {% endif %}></td>
+                                        <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name:
+                                                {{ entry.game }}</label></td>
+                                        <td><input type="checkbox" id="entry_{{ entry.id }}" name="entry_{{ entry.id }}"
+                                                value="True" {% if entry.completed %} checked {% endif %}></td>
+                                        <td>
+                                            <button type="submit" name="remove_game_{{ entry.id }}"
+                                                class="btn btn-danger btn-sm">Remove</button>
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </table>
