@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import User_Profile, User_Library, User, Comment, Privacy
-from .forms import CommentForm, FavouritesForm
+from .forms import CommentForm, FavouritesForm, AddGameForm
 
 
 # def comment_edit(request, comment_id):
@@ -50,33 +50,39 @@ def manage_profile(request):
         User_Profile.objects.create(user=user, privacy=privacy)
     profile = get_object_or_404(User_Profile, user=user)
     library = User_Library.objects.filter(user=user)
+    
+    favourites_form = FavouritesForm(instance=profile)
+    add_game_form = AddGameForm()
 
     if request.method == "POST":
-        favourites_form = FavouritesForm(data=request.POST, instance=profile)
-        if favourites_form.is_valid():
-            favourites_form.save()
-            for entry in library:
-                entry_id = f"entry_{entry.id}"
-                entry.completed = entry_id in request.POST
-                entry.save()
-            messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
-        else:
-            messages.add_message(request, messages.ERROR,
-                                 'Error updating profile!')
-    else:
-        favourites_form = FavouritesForm(instance=profile)
+        if 'favourites_form' in request.POST:
+            favourites_form = FavouritesForm(data=request.POST, instance=profile)
+            if favourites_form.is_valid():
+                favourites_form.save()
+                for entry in library:
+                    entry_id = f"entry_{entry.id}"
+                    entry.completed = entry_id in request.POST
+                    entry.save()
+                messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
+            else:
+                messages.add_message(request, messages.ERROR, 'Error updating profile!')
+        elif 'add_game_form' in request.POST:
+            add_game_form = AddGameForm(data=request.POST)
+            if add_game_form.is_valid():
+                new_game = add_game_form.save(commit=False)
+                new_game.user = user
+                new_game.save()
+                messages.add_message(request, messages.SUCCESS, 'Game added to library!')
+            else:
+                messages.add_message(request, messages.ERROR, 'Error adding game to library!')
 
     context = {
         "library": library,
         "profile": profile,
         "favourites_form": favourites_form,
-
+        "add_game_form": add_game_form,
     }
-    return render(
-        request,
-        "profiles/manage.html",
-        context,
-    )
+    return render(request, "profiles/manage.html", context)
 
 
 def home(request):

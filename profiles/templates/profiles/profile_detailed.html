@@ -14,28 +14,29 @@
                 <div class="col-md-4 text-center">
                     <h1>{{ user_identified }}</h1>
                     <hr>
-                    <!-- Checks if the user has a favourite game or platform -->
-                    <p class="text-muted>">{% if profile.game or profile.platform%}
-                    <table class="table">
-                        <tr>
-                            <!-- Define table headings based on the user's favourite game or platform -->
-                            {% if profile.game %}
-                            <th>Favourite Game</th>
-                            {% endif %}
-                            {% if profile.platform %}
-                            <th>Favourite Platform</th>
-                            {% endif %}
-                        </tr>
-                        <!-- Display favourites  -->
-                        <tr>{% if profile.game %}
-                            <td>{{ profile.game }}</td>
-                            {% endif %}
-                            {% if profile.platform %}
-                            <td>{{ profile.platform }}</td>
-                            {% endif %}
-                        </tr>
-                    </table>
-                    {% endif %}</p>
+
+                        <!-- Checks if the user has a favourite game or platform -->
+                        <p class="text-muted>">{% if profile.game or profile.platform%}
+                        <table class="table">
+                            <tr>
+                                <!-- Define table headings based on the user's favourite game or platform -->
+                                {% if profile.game %}
+                                <th>Favourite Game</th>
+                                {% endif %}
+                                {% if profile.platform %}
+                                <th>Favourite Platform</th>
+                                {% endif %}
+                            </tr>
+                            <!-- Display favourites  -->
+                            <tr>{% if profile.game %}
+                                <td>{{ profile.game }}</td>
+                                {% endif %}
+                                {% if profile.platform %}
+                                <td>{{ profile.platform }}</td>
+                                {% endif %}
+                            </tr>
+                        </table>
+                        {% endif %}</p>
                 </div>
             </div>
             <div class="row justify-content-center">

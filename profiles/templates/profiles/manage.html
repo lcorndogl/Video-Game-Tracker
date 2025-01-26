@@ -16,6 +16,12 @@
                 <div class="col-md-12 text-center">
                     <h1>Modifying Profile: {{ user }}</h1>
                     <hr>
+                    <h2>Add new game to Library</h2>
+                    <form method="post">
+                        {{ add_game_form | crispy }}
+                        {% csrf_token %}
+                        <button type="submit" name="add_game_form" class="btn btn-signup btn-lg">Add</button>
+                    </form>
 
                     <div class="card mb-4 mt-3">
                         <div class="card-body">
@@ -35,44 +41,17 @@
                                     </tr>
                                     {% endfor %}
                                 </table>
-                                <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+
+                                <button type="submit" name="favourites_form" class="btn btn-signup btn-lg">Save</button>
                             </form>
                         </div>
                     </div>
-
-
-                    <!-- {% for comment in comments %}
-                    <div class="p-2 comments
-                    {% if not comment.approved and comment.author == user %}
-                    faded{% elif not comment.approved %} d-none{% endif %}">
-                        <p class="font-weight-bold">
-                            {{ comment.commenter }}
-                            <span class="font-weight-normal">
-                                {{ comment.created_on }}
-                            </span> wrote:
-                        </p>
-                        <div id="comment{{ comment.id }}">
-                            {{ comment.body | linebreaks }}
-                        </div>
-                        {% if not comment.approved and comment.commenter == user %}
-                        <p class="approval">
-                            This comment is awaiting approval
-                        </p>
-                        {% endif %}
-                        {% if user.is_authenticated and comment.commenter == user %}
-                        <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-                        <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
-                        {% endif %}
-                    </div>
-                    <!-- Our for loop ends here -->
-                    {% endfor %} -->
                 </div>
             </div>
             {% endif %}
 
         </div>
     </div>
-</div>
 </div>
 <!-- profile_detailed.html content ends here -->
 {% endblock %}
