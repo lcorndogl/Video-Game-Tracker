@@ -5,7 +5,8 @@
   --red: #d62828;
 }
 
-body {
+body,
+footer {
   --jet: #2a2b2a;
 }
 
@@ -56,7 +57,8 @@ main {
   border: 1px solid var(--peri);
 }
 
-.table th, .table td {
+.table th,
+.table td {
   border: 1px solid var(--peri);
 }
 
