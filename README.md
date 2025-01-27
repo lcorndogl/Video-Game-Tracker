@@ -152,6 +152,7 @@ EZGif Convertor: https://ezgif.com/
 ### Colour Scheme
 <!-- TODO: 
  -->
+ I chose a dark theme for the site with colours like blue, yellow and red, as a homage to what an old arcade game machine would look like.
 
 ### Imagery
 <!-- TODO: find out where images come from -->
@@ -409,10 +410,9 @@ TODO: Implement?!?
 
 ###### [*Back to contents*](#contents)
 
-<!-- TODO: -->
-<!-- ### [Coolors for the colour scheme](https://coolors.co/ebebeb-c2b8b2-197bbd-090c9b-2a2b2a)
+### [Coolors for the colour scheme](https://coolors.co/d62828-beb8eb-ffba08-2a2b2a)
 
-###### [*Back to contents*](#contents) -->
+###### [*Back to contents*](#contents)
 
 ### Eraser.io
 
