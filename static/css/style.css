@@ -41,3 +41,36 @@ main {
 .navbar a:hover {
   color: var(--peri);
 }
+
+.select,
+.form-select {
+  background-color: var(--jet);
+  color: var(--yel);
+  border: 1px solid var(--peri); /* Adjust the border color here */
+}
+
+/* Table styling */
+.table {
+  background-color: var(--jet);
+  color: var(--yel);
+  border: 1px solid var(--peri);
+}
+
+.table th, .table td {
+  border: 1px solid var(--peri);
+}
+
+.table th {
+  background-color: var(--jet);
+  color: var(--yel);
+}
+
+.table td {
+  background-color: var(--jet);
+  color: var(--yel);
+}
+
+.table tr:hover {
+  background-color: var(--peri);
+  color: var(--jet);
+}
