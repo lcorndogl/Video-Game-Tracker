@@ -81,6 +81,11 @@ p {
   border: 1px solid var(--peri); /* Adjust the border color here */
 }
 
+/* Styling for total comments */
+.total-comments {
+    color: var(--yel);
+  }
+
 /* Table styling */
 .table {
   background-color: var(--jet);

@@ -15,28 +15,28 @@
                     <h1>{{ user_identified }}</h1>
                     <hr>
 
-                        <!-- Checks if the user has a favourite game or platform -->
-                        <p class="text-muted>">{% if profile.game or profile.platform%}
-                        <table class="table">
-                            <tr>
-                                <!-- Define table headings based on the user's favourite game or platform -->
-                                {% if profile.game %}
-                                <th>Favourite Game</th>
-                                {% endif %}
-                                {% if profile.platform %}
-                                <th>Favourite Platform</th>
-                                {% endif %}
-                            </tr>
-                            <!-- Display favourites  -->
-                            <tr>{% if profile.game %}
-                                <td>{{ profile.game }}</td>
-                                {% endif %}
-                                {% if profile.platform %}
-                                <td>{{ profile.platform }}</td>
-                                {% endif %}
-                            </tr>
-                        </table>
-                        {% endif %}</p>
+                    <!-- Checks if the user has a favourite game or platform -->
+                    <p class="text-muted>">{% if profile.game or profile.platform%}
+                    <table class="table">
+                        <tr>
+                            <!-- Define table headings based on the user's favourite game or platform -->
+                            {% if profile.game %}
+                            <th>Favourite Game</th>
+                            {% endif %}
+                            {% if profile.platform %}
+                            <th>Favourite Platform</th>
+                            {% endif %}
+                        </tr>
+                        <!-- Display favourites  -->
+                        <tr>{% if profile.game %}
+                            <td>{{ profile.game }}</td>
+                            {% endif %}
+                            {% if profile.platform %}
+                            <td>{{ profile.platform }}</td>
+                            {% endif %}
+                        </tr>
+                    </table>
+                    {% endif %}</p>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -66,9 +66,9 @@
     <!-- Displaying count of comments -->
     <div class="row">
         <div class="col-12">
-            <strong class="text-secondary">
-                <i class="far fa-comments"></i> Total Comments: {{ comment_count }}
-            </strong>
+            <div class="total-comments">
+                Total Comments: {{ comment_count }}
+            </div>
         </div>
         <div class="col-12">
             <hr>
@@ -77,8 +77,9 @@
     <!-- Displaying Comments -->
     <div class="row">
         <div class="col-md-8 card mb-4  mt-3 ">
-            <h3>Comments:</h3>
+
             <div class="card-body">
+                <h3>Comments:</h3>
                 <!-- We want a for loop inside the empty control tags
             to iterate through each comment in comments -->
                 {% for comment in comments %}
