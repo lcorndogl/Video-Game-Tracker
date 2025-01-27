@@ -38,6 +38,16 @@ p {
   color: var(--peri);
 }
 
+/* Navbar Hamburger Menu Styling */
+.navbar-toggler {
+  border-color: var(--yel); /* Optional: Change the border color of the button */
+}
+
+.navbar-toggler-icon {
+  background-color: var(--yel); /* Set the background color to match the text color */
+  border: 1px solid var(--yel); /* Optional: Add a border to the icon */
+}
+
 /* Button Styling */
 .btn-signup {
   background-color: var(--peri);
