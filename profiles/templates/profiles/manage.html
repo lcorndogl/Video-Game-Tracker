@@ -63,8 +63,7 @@
                                                 </tr>
                                                 {% for entry in library %}
                                                 <tr>
-                                                    <td><label for="entry_{{ entry.id }}">Name:
-                                                            {{ entry.game }}</label></td>
+                                                    <td><label for="entry_{{ entry.id }}">{{ entry.game }}</label></td>
                                                     <td><input type="checkbox" id="entry_{{ entry.id }}"
                                                             name="entry_{{ entry.id }}" {% if entry.completed%} checked
                                                             {% endif %} value="True"></td>

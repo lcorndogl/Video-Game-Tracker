@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "DynaPuff", "Press Start 2P", comic sans ms;
 }
 
 footer {
@@ -40,11 +41,15 @@ p {
 
 /* Navbar Hamburger Menu Styling */
 .navbar-toggler {
-  border-color: var(--yel); /* Optional: Change the border color of the button */
+  border-color: var(
+    --yel
+  ); /* Optional: Change the border color of the button */
 }
 
 .navbar-toggler-icon {
-  background-color: var(--yel); /* Set the background color to match the text color */
+  background-color: var(
+    --yel
+  ); /* Set the background color to match the text color */
   border: 1px solid var(--yel); /* Optional: Add a border to the icon */
 }
 
