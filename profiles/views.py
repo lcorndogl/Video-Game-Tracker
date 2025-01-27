@@ -24,37 +24,35 @@ def manage_profile(request):
 
     if request.method == "POST":
         if 'favourites_form' in request.POST:
-            favourites_form = FavouritesForm(data=request.POST,
-                                             instance=profile)
+            favourites_form = FavouritesForm(data=request.POST, instance=profile)
             if favourites_form.is_valid():
                 favourites_form.save()
-                for entry in library:
-                    entry_id = f"entry_{entry.id}"
-                    entry.completed = entry_id in request.POST
-                    entry.save()
-                messages.add_message(request, messages.SUCCESS,
-                                     'Profile Updated!')
+                messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
             else:
-                messages.add_message(request, messages.ERROR,
-                                     'Error updating profile!')
+                messages.add_message(request, messages.ERROR, 'Error updating profile!')
         elif 'add_game_form' in request.POST:
             add_game_form = AddGameForm(data=request.POST)
             if add_game_form.is_valid():
                 new_game = add_game_form.save(commit=False)
                 new_game.user = user
                 new_game.save()
-                messages.add_message(request, messages.SUCCESS,
-                                     'Game added to library!')
+                messages.add_message(request, messages.SUCCESS, 'Game added to library!')
             else:
-                messages.add_message(request, messages.ERROR,
-                                     'Error adding game to library!')
+                messages.add_message(request, messages.ERROR, 'Error adding game to library!')
         elif 'remove_game_id' in request.POST:
             game_id = request.POST.get('remove_game_id')
             entry = get_object_or_404(User_Library, id=game_id, user=user)
             entry.delete()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Game removed from library!')
+            messages.add_message(request, messages.SUCCESS, 'Game removed from library!')
             return redirect('manage')
+        else:
+            # Handle the library update form submission
+            for entry in library:
+                entry_id = f'entry_{entry.id}'
+                if entry_id in request.POST:
+                    entry.completed = request.POST.get(entry_id) == 'True'
+                    entry.save()
+            messages.add_message(request, messages.SUCCESS, 'Library updated!')
 
     else:
         favourites_form = FavouritesForm(instance=profile)

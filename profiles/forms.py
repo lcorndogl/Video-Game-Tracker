@@ -31,6 +31,5 @@ class AddGameForm(forms.ModelForm):
         fields = ('game', 'platform', 'completed')
         widgets = {
             'game': forms.Select(attrs={'id': 'add_game_id'}),
-            'platform': forms.Select(attrs={'id': 'add_platform_id'}),
             'completed': forms.CheckboxInput(attrs={'id': 'add_completed_id'}),
         }
