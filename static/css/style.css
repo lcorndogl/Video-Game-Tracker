@@ -5,16 +5,26 @@
   --red: #d62828;
 }
 
-body,
+body {
+  background-color: var(--jet);
+  color: var(--yel);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 footer {
-  --jet: #2a2b2a;
-  min-height:
+  background-color: var(--jet);
+  color: var(--yel);
+  margin-top: auto;
 }
 
 main {
   background-color: var(--jet);
   color: var(--yel);
+  flex: 1;
 }
+
 .container {
   background-color: var(--jet);
   color: var(--yel);
