@@ -16,18 +16,34 @@
                 <div class="col-md-12 text-center">
                     <h1>Modifying Profile: {{ user }}</h1>
                     <hr>
-                    <h2>Add new game to Library</h2>
-                    <form method="post">
-                        {{ add_game_form | crispy }}
-                        {% csrf_token %}
-                        <button type="submit" name="add_game_form" class="btn btn-signup btn-lg">Add</button>
-                    </form>
 
-                    <div class="card mb-4 mt-3">
+                    <!-- Add new game to Library -->
+                    <div class="col-4 col-md-6 col-sm-12">
+                        <h2>Add new game to Library</h2>
+                        <form method="post">
+                            {{ add_game_form | crispy }}
+                            {% csrf_token %}
+                            <button type="submit" name="add_game_form" class="btn btn-signup btn-lg">Add</button>
+                        </form>
+                    </div>
+
+                    <!-- Modify Favourites -->
+                    <div class="card mb-4 mt-3 col-4 col-md-6 col-sm-12">
                         <div class="card-body">
-                            <h3>Modifying Profile:</h3>
+                            <h3>Modify Favourites:</h3>
                             <form id="profileForm" method="post" style="margin-top: 1.3em;">
                                 {{ favourites_form | crispy }}
+                                {% csrf_token %}
+                                <button type="submit" name="favourites_form" class="btn btn-signup btn-lg">Save</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Library Information -->
+                    <div class="card mb-4 mt-3 col-4 col-md-6 col-sm-12">
+                        <div class="card-body">
+                            <h3>Library Information:</h3>
+                            <form id="libraryForm" method="post" style="margin-top: 1.3em;">
                                 {% csrf_token %}
                                 <table class="table">
                                     <tr>
@@ -37,8 +53,8 @@
                                     </tr>
                                     {% for entry in library %}
                                     <tr>
-                                        <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name:
-                                                {{ entry.game }}</label></td>
+                                        <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name: {{
+                                                entry.game }}</label></td>
                                         <td><input type="checkbox" id="entry_{{ entry.id }}" name="entry_{{ entry.id }}"
                                                 value="True" {% if entry.completed %} checked {% endif %}></td>
                                         <td>
@@ -48,11 +64,11 @@
                                     </tr>
                                     {% endfor %}
                                 </table>
-
-                                <button type="submit" name="favourites_form" class="btn btn-signup btn-lg">Save</button>
+                                <button type="submit" name="library_form" class="btn btn-signup btn-lg">Save</button>
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
             {% endif %}
