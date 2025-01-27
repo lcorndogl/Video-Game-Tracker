@@ -20,8 +20,6 @@ class FavouritesForm(forms.ModelForm):
 class AddGameForm(forms.ModelForm):
     game = forms.ModelChoiceField(
         queryset=Game.objects.all(), empty_label=None)
-    # completed = forms.ModelChoiceField(
-    #     queryset=User_Library.objects.all(), empty_label=None)
 
     class Meta:
         model = User_Library

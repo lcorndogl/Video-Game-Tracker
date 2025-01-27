@@ -34,6 +34,15 @@ nav {
   background-color: var(--jet);
   color: var(--yel);
 }
+p {
+  color: var(--peri);
+}
+
+/* Button Styling */
+.btn-signup {
+  background-color: var(--peri);
+  color: var(--jet);
+}
 
 /* Card Styling */
 .card-body .post-link {
