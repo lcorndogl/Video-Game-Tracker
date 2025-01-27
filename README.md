@@ -445,8 +445,14 @@ Any other things I end up using
 
 ### Fonts
 
-###### [*Back to contents*](#contents)
-<!-- TODO:
-#### [FontName](Font URL)
+I chose two fonts from google fonts to use in the font family that looked fun/gaming inspired. DynaPuff is the font that is set first in the body via the CSS, and Press Start 2P is there as a backup if for any reason the DynaPuff font cannot be loaded.
 
-###### [*Back to contents*](#contents) -->
+###### [*Back to contents*](#contents)
+
+#### [DynaPuff](https://fonts.google.com/specimen/DynaPuff)
+
+###### [*Back to contents*](#contents)
+
+#### [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P)
+
+###### [*Back to contents*](#contents)
