@@ -44,6 +44,11 @@ p {
   color: var(--jet);
 }
 
+.btn-danger,
+.btn-danger:hover {
+  background-color: var(--red);
+}
+
 /* Card Styling */
 .card-body .post-link {
   color: var(--yel);
@@ -83,8 +88,8 @@ p {
 
 /* Styling for total comments */
 .total-comments {
-    color: var(--yel);
-  }
+  color: var(--yel);
+}
 
 /* Table styling */
 .table {
@@ -110,11 +115,34 @@ p {
 
 .table tr:hover {
   background-color: var(--peri);
-  color: var(--jet);
+  color: var (--jet);
 }
 
 /* Modal Styling  */
 .modal-content {
   background-color: var(--jet);
   color: var(--yel);
+}
+
+/* Form styling */
+.form-control {
+  background-color: var(--jet);
+  color: var (--yel);
+  border: 1px solid var(--peri);
+}
+
+.form-control:focus {
+  border-color: var(--peri);
+  box-shadow: 0 0 0 0.2rem rgba(128, 128, 128, 0.25);
+}
+
+.form-select {
+  background-color: var(--jet);
+  color: var(--yel);
+  border: 1px solid var(--peri);
+}
+
+.form-select:focus {
+  border-color: var(--peri);
+  box-shadow: 0 0 0 0.2rem rgba(128, 128, 128, 0.25);
 }

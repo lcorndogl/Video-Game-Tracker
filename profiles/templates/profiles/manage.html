@@ -16,49 +16,76 @@
                 <div class="col-md-12 text-center">
                     <h1>Modifying Profile: {{ user }}</h1>
                     <hr>
-                    <h2>Add new game to Library</h2>
-                    <form method="post">
-                        {{ add_game_form | crispy }}
-                        {% csrf_token %}
-                        <button type="submit" name="add_game_form" class="btn btn-signup btn-lg">Add</button>
-                    </form>
+                    <div class="container">
+                        <div class="row">
+                            <!-- Add Game Form -->
+                            <div class="col-lg-4">
+                                <div class="card mb-4 mt-3">
+                                    <div class="card-body">
+                                        <h3>Add Game</h3>
+                                        <form method="post">
+                                            {{ add_game_form | crispy }}
+                                            {% csrf_token %}
+                                            <button type="submit" name="add_game_form"
+                                                class="btn btn-signup btn-lg">Add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="card mb-4 mt-3">
-                        <div class="card-body">
-                            <h3>Modifying Profile:</h3>
-                            <form id="profileForm" method="post" style="margin-top: 1.3em;">
-                                {{ favourites_form | crispy }}
-                                {% csrf_token %}
-                                <table class="table">
-                                    <tr>
-                                        <th>Game</th>
-                                        <th>Completed</th>
-                                        <th>Remove</th>
-                                    </tr>
-                                    {% for entry in library %}
-                                    <tr>
-                                        <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name:
-                                                {{ entry.game }}</label></td>
-                                        <td><input type="checkbox" id="entry_{{ entry.id }}" name="entry_{{ entry.id }}"
-                                                value="True" {% if entry.completed %} checked {% endif %}></td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger btn-sm"
-                                                onclick="confirmRemove('{{ entry.id }}', '{{ entry.game }}')">Remove</button>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </table>
+                            <!-- Library Section -->
+                            <div class="col-lg-4">
+                                <div class="card mb-4 mt-3">
+                                    <div class="card-body">
+                                        <h3>Library</h3>
+                                        <table class="table">
+                                            <tr>
+                                                <th>Game</th>
+                                                <th>Completed</th>
+                                                <th>Remove</th>
+                                            </tr>
+                                            {% for entry in library %}
+                                            <tr>
+                                                <td><label for="entry_{{ entry.id }}">ID: {{ entry.id }} &nbsp;Name:
+                                                        {{ entry.game }}</label></td>
+                                                <td><input type="checkbox" id="entry_{{ entry.id }}"
+                                                        name="entry_{{ entry.id }}" value="True" {% if entry.completed%}
+                                                        checked {% endif %}></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        onclick="confirmRemove('{{ entry.id }}', '{{ entry.game }}')">Remove</button>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <button type="submit" name="favourites_form" class="btn btn-signup btn-lg">Save</button>
-                            </form>
+                            <!-- Manage Profile Form -->
+                            <div class="col-lg-4">
+                                <form id="profileForm" method="post" style="margin-top: 1.3em;">
+                                    <div class="card mb-4 mt-3">
+                                        <div class="card-body">
+                                            <h3>Favourites</h3>
+                                            {{ favourites_form | crispy }}
+                                            {% csrf_token %}
+                                            <button type="submit" name="favourites_form"
+                                                class="btn btn-signup btn-lg">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endif %}
-
         </div>
     </div>
+    {% endif %}
+
+</div>
+</div>
 </div>
 <!-- Modal -->
 <div id="confirmRemoveModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="confirmRemoveModalLabel"
