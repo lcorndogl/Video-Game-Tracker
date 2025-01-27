@@ -8,8 +8,10 @@ from .forms import CommentForm, FavouritesForm, AddGameForm
 
 def manage_profile(request):
     """
-    Renders the profiles page
-    Shows users who have their privacy matching to the users logged in status
+    Allows the user to modify their profile, including:
+    Adding/removing games to their User_Library
+    Updating their User_Profile
+    Updating their User_Library game status'
     """
     user = get_object_or_404(User, username=request.user)
     # add if statement here to create User_Profile if it doesn't exist?
@@ -24,26 +26,32 @@ def manage_profile(request):
 
     if request.method == "POST":
         if 'favourites_form' in request.POST:
-            favourites_form = FavouritesForm(data=request.POST, instance=profile)
+            favourites_form = FavouritesForm(data=request.POST,
+                                             instance=profile)
             if favourites_form.is_valid():
                 favourites_form.save()
-                messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
+                messages.add_message(request, messages.SUCCESS,
+                                     'Profile Updated!')
             else:
-                messages.add_message(request, messages.ERROR, 'Error updating profile!')
+                messages.add_message(request, messages.ERROR,
+                                     'Error updating profile!')
         elif 'add_game_form' in request.POST:
             add_game_form = AddGameForm(data=request.POST)
             if add_game_form.is_valid():
                 new_game = add_game_form.save(commit=False)
                 new_game.user = user
                 new_game.save()
-                messages.add_message(request, messages.SUCCESS, 'Game added to library!')
+                messages.add_message(request, messages.SUCCESS,
+                                     'Game added to library!')
             else:
-                messages.add_message(request, messages.ERROR, 'Error adding game to library!')
+                messages.add_message(request, messages.ERROR,
+                                     'Error adding game to library!')
         elif 'remove_game_id' in request.POST:
             game_id = request.POST.get('remove_game_id')
             entry = get_object_or_404(User_Library, id=game_id, user=user)
             entry.delete()
-            messages.add_message(request, messages.SUCCESS, 'Game removed from library!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Game removed from library!')
             return redirect('manage')
         else:
             # Handle the library update form submission
@@ -69,8 +77,7 @@ def manage_profile(request):
 
 def home(request):
     """
-    Renders the profiles page
-    Shows users who have their privacy matching to the users logged in status
+    Displays the home page
     """
     return render(
         request,
@@ -100,12 +107,12 @@ class ProfileList(generic.ListView):
 
 def profile_detailed(request, username):
     """
-    Display an individual :model:`blog.Post`.
+    Display an individual :model:`User_Profile.User_Library`.
     **Context**
-    ``post``
-        An instance of :model:`blog.Post`.
+    ``User_Library``
+        An instance of :model:`profiles.User_Library`.
     **Template:**
-    :template:`blog/post_detail.html`
+    :template:`profiles/profile_detailed.html`
     """
 
     user = get_object_or_404(User, username=username)
@@ -158,11 +165,11 @@ def comment_edit(request, comment_id):
     **Context**
 
     ``post``
-        An instance of :model:`blog.Post`.
+        An instance of :model:`profiles.User_Profile`.
     ``comment``
-        A single comment related to the post.
+        A single comment related to the profile.
     ``comment_form``
-        An instance of :form:`blog.CommentForm`.
+        An instance of :form:`profiles.CommentForm`.
     """
     if request.method == "POST":
 
@@ -189,10 +196,10 @@ def comment_delete(request, comment_id):
     Delete an individual comment.
 
     **Context**
-    ``post``
-        An instance of :model:`blog.Post`.
+    ``profile``
+        An instance of :model:`profiles.User_Profile`.
     ``comment``
-        A single comment related to the post.
+        A single comment related to the profile.
     """
 
     comment = get_object_or_404(Comment, pk=comment_id)
