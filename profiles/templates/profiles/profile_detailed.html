@@ -15,51 +15,55 @@
                     <h1>{{ user_identified }}</h1>
                     <hr>
 
-                    <!-- Checks if the user has a favourite game or platform -->
-                    <p class="text-muted>">{% if profile.game or profile.platform%}
-                    <table class="table">
-                        <tr>
-                            <!-- Define table headings based on the user's favourite game or platform -->
-                            {% if profile.game %}
-                            <th>Favourite Game</th>
-                            {% endif %}
-                            {% if profile.platform %}
-                            <th>Favourite Platform</th>
-                            {% endif %}
-                        </tr>
-                        <!-- Display favourites  -->
-                        <tr>{% if profile.game %}
-                            <td>{{ profile.game }}</td>
-                            {% endif %}
-                            {% if profile.platform %}
-                            <td>{{ profile.platform }}</td>
-                            {% endif %}
-                        </tr>
-                    </table>
-                    {% endif %}</p>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <!-- Checks if the user has a favourite game or platform -->
+                            <p class="text-muted>">{% if profile.game or profile.platform%}
+                            <table class="table">
+                                <tr>
+                                    <!-- Define table headings based on the user's favourite game or platform -->
+                                    {% if profile.game %}
+                                    <th>Favourite Game</th>
+                                    {% endif %}
+                                    {% if profile.platform %}
+                                    <th>Favourite Platform</th>
+                                    {% endif %}
+                                </tr>
+                                <!-- Display favourites  -->
+                                <tr>{% if profile.game %}
+                                    <td>{{ profile.game }}</td>
+                                    {% endif %}
+                                    {% if profile.platform %}
+                                    <td>{{ profile.platform }}</td>
+                                    {% endif %}
+                                </tr>
+                            </table>
+                            {% endif %}</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <!-- Library Info -->
-                {% if backlog %}
-                <div class="card mb-4 col12 col-md-5 text-center mx-auto">
-                    <h2 class="card-title">Backlog</h2>
-                    {% for entry in backlog %}
-                    <p>{{ entry.game }}</p>
-                    {% endfor %}
+                <div class="row justify-content-center">
+                    <!-- Library Info -->
+                    {% if backlog %}
+                    <div class="card mb-4 col12 col-md-5 text-center mx-auto">
+                        <h2 class="card-title">Backlog</h2>
+                        {% for entry in backlog %}
+                        <p>{{ entry.game }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if completed %}
+                    <div class="card mb-4 col12 col-md-5 text-center mx-auto">
+                        <h2 class="card-title">Completed</h2>
+                        {% for entry in completed %}
+                        <p>{{ entry.game }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+
                 </div>
-                {% endif %}
-
-                {% if completed %}
-                <div class="card mb-4 col12 col-md-5 text-center mx-auto">
-                    <h2 class="card-title">Completed</h2>
-                    {% for entry in completed %}
-                    <p>{{ entry.game }}</p>
-                    {% endfor %}
-                </div>
-                {% endif %}
-
-
             </div>
         </div>
     </div>
