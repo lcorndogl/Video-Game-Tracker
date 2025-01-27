@@ -6,42 +6,10 @@ from .models import User_Profile, User_Library, User, Comment, Privacy
 from .forms import CommentForm, FavouritesForm, AddGameForm
 
 
-# def comment_edit(request, comment_id):
-#     """
-#     Display an individual comment for edit.
-
-#     **Context**
-
-#     ``post``
-#         An instance of :model:`blog.Post`.
-#     ``comment``
-#         A single comment related to the post.
-#     ``comment_form``
-#         An instance of :form:`blog.CommentForm`.
-#     """
-#     if request.method == "POST":
-
-#         user = get_object_or_404(User, username=request.user)
-#         comment = get_object_or_404(Comment, pk=comment_id)
-#         comment_form = CommentForm(data=request.POST, instance=comment)
-
-#         if comment_form.is_valid() and comment.commenter == request.user:
-#             comment = comment_form.save(commit=False)
-#             comment.commenter = user
-#             comment.approved = True
-#             comment.save()
-#             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
-#         else:
-#             messages.add_message(request, messages.ERROR,
-#                                  'Error updating comment!')
-
-#     return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
-
-
 def manage_profile(request):
     """
     Renders the profiles page
-    Shows users who have their visibility matching to the users logged in status
+    Shows users who have their privacy matching to the users logged in status
     """
     user = get_object_or_404(User, username=request.user)
     # add if statement here to create User_Profile if it doesn't exist?
@@ -50,36 +18,42 @@ def manage_profile(request):
         User_Profile.objects.create(user=user, privacy=privacy)
     profile = get_object_or_404(User_Profile, user=user)
     library = User_Library.objects.filter(user=user)
-    
+
     favourites_form = FavouritesForm(instance=profile)
     add_game_form = AddGameForm()
 
     if request.method == "POST":
         if 'favourites_form' in request.POST:
-            favourites_form = FavouritesForm(data=request.POST, instance=profile)
+            favourites_form = FavouritesForm(data=request.POST,
+                                             instance=profile)
             if favourites_form.is_valid():
                 favourites_form.save()
                 for entry in library:
                     entry_id = f"entry_{entry.id}"
                     entry.completed = entry_id in request.POST
                     entry.save()
-                messages.add_message(request, messages.SUCCESS, 'Profile Updated!')
+                messages.add_message(request, messages.SUCCESS,
+                                     'Profile Updated!')
             else:
-                messages.add_message(request, messages.ERROR, 'Error updating profile!')
+                messages.add_message(request, messages.ERROR,
+                                     'Error updating profile!')
         elif 'add_game_form' in request.POST:
             add_game_form = AddGameForm(data=request.POST)
             if add_game_form.is_valid():
                 new_game = add_game_form.save(commit=False)
                 new_game.user = user
                 new_game.save()
-                messages.add_message(request, messages.SUCCESS, 'Game added to library!')
+                messages.add_message(request, messages.SUCCESS,
+                                     'Game added to library!')
             else:
-                messages.add_message(request, messages.ERROR, 'Error adding game to library!')
+                messages.add_message(request, messages.ERROR,
+                                     'Error adding game to library!')
         elif 'remove_game_id' in request.POST:
             game_id = request.POST.get('remove_game_id')
             entry = get_object_or_404(User_Library, id=game_id, user=user)
             entry.delete()
-            messages.add_message(request, messages.SUCCESS, 'Game removed from library!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Game removed from library!')
             return redirect('manage')
 
     else:
@@ -98,7 +72,7 @@ def manage_profile(request):
 def home(request):
     """
     Renders the profiles page
-    Shows users who have their visibility matching to the users logged in status
+    Shows users who have their privacy matching to the users logged in status
     """
     return render(
         request,
@@ -109,9 +83,17 @@ def home(request):
 class ProfileList(generic.ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return User_Profile.objects.filter(privacy__in=["1", "3"]).order_by("-updated_on")
+            return (
+                User_Profile.objects
+                .filter(privacy__in=["1", "3"])
+                .order_by("-updated_on")
+            )
         else:
-            return User_Profile.objects.filter(privacy__lt="2").order_by("-updated_on")
+            return (
+                User_Profile.objects
+                .filter(privacy__lt="2")
+                .order_by("-updated_on")
+                )
 
     context_object_name = 'profiles'
     template_name = "profiles/profiles.html"
@@ -128,7 +110,6 @@ def profile_detailed(request, username):
     :template:`blog/post_detail.html`
     """
 
-    # queryset = User.objects.filter(username=username).values()
     user = get_object_or_404(User, username=username)
     profile = get_object_or_404(User_Profile, user=user)
     library = User_Library.objects.filter(user=user)
@@ -201,7 +182,8 @@ def comment_edit(request, comment_id):
             messages.add_message(request, messages.ERROR,
                                  'Error updating comment!')
 
-    return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
+    return HttpResponseRedirect(reverse('profile_detailed',
+                                        args=[comment.profile]))
 
 
 def comment_delete(request, comment_id):
@@ -215,7 +197,6 @@ def comment_delete(request, comment_id):
         A single comment related to the post.
     """
 
-    # user = get_object_or_404(User, username=request.user)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.commenter == request.user:
@@ -225,36 +206,5 @@ def comment_delete(request, comment_id):
         messages.add_message(request, messages.ERROR,
                              'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('profile_detailed', args=[comment.profile]))
-
-# def favourite_edit(request, slug, comment_id):
-#     """
-#     Display an individual comment for edit.
-
-#     **Context**
-
-#     ``post``
-#         An instance of :model:`blog.Post`.
-#     ``comment``
-#         A single comment related to the post.
-#     ``comment_form``
-#         An instance of :form:`blog.CommentForm`.
-#     """
-#     if request.method == "POST":
-
-#         queryset = Post.objects.filter(status=1)
-#         post = get_object_or_404(queryset, slug=slug)
-#         comment = get_object_or_404(Comment, pk=comment_id)
-#         comment_form = CommentForm(data=request.POST, instance=comment)
-
-#         if comment_form.is_valid() and comment.author == request.user:
-#             comment = comment_form.save(commit=False)
-#             comment.post = post
-#             comment.approved = False
-#             comment.save()
-#             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
-#         else:
-#             messages.add_message(request, messages.ERROR,
-#                                 'Error updating comment!')
-
-#     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse('profile_detailed',
+                                        args=[comment.profile]))
