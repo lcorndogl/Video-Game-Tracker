@@ -15,6 +15,11 @@ class FavouritesForm(forms.ModelForm):
     class Meta:
         model = User_Profile
         fields = ('game', 'platform', 'privacy')
+        widgets = {
+            'game': forms.Select(attrs={'id': 'fav_game_id'}),
+            'platform': forms.Select(attrs={'id': 'fav_platform_id'}),
+            'completed': forms.CheckboxInput(attrs={'id': 'fav_completed_id'}),
+        }
 
 
 class AddGameForm(forms.ModelForm):
@@ -24,3 +29,8 @@ class AddGameForm(forms.ModelForm):
     class Meta:
         model = User_Library
         fields = ('game', 'platform', 'completed')
+        widgets = {
+            'game': forms.Select(attrs={'id': 'add_game_id'}),
+            'platform': forms.Select(attrs={'id': 'add_platform_id'}),
+            'completed': forms.CheckboxInput(attrs={'id': 'add_completed_id'}),
+        }
