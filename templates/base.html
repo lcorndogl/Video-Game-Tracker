@@ -15,38 +15,21 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="https://img.icons8.com/ios-filled/50/000000/controller.png" width="30" height="30"
-                    class="d-inline-block align-top" alt="">
-                &ensp; Video Game Tracker
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/controller.png" width="30" height="30"
+                        class="d-inline-block align-top" alt="">
+                    &ensp; Video Game Tracker
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            {% if user.is_authenticated %}
-            <!-- Code for Logged In navbar -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profiles' %}">Profiles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'manage' %}">Edit Profile ({{ user }})</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                </ul>
-
-                {% else %}
-                <!-- Code for Logged Out Navbar  -->
+                {% if user.is_authenticated %}
+                <!-- Code for Logged In navbar -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -56,15 +39,34 @@
                             <a class="nav-link" href="{% url 'profiles' %}">Profiles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_signup' %}">Sign Up (Not logged in)</a>
+                            <a class="nav-link" href="{% url 'manage' %}">Edit Profile ({{ user }})</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                         </li>
                     </ul>
-                </div>
-                {% endif %}
-        </nav>
+
+                    {% else %}
+                    <!-- Code for Logged Out Navbar  -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'profiles' %}">Profiles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Sign Up (Not logged in)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endif %}
+            </nav>
+        </header>
         <!-- displaying Django messages -->
         <div class="container">
             <div class="row">
