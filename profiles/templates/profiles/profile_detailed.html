@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <!-- Checks if the user has a favourite game or platform -->
-                            <p class="text-muted>">{% if profile.game or profile.platform%}
+                            {% if profile.game or profile.platform%}
                             <table class="table">
                                 <tr>
                                     <!-- Define table headings based on the user's favourite game or platform -->
@@ -38,7 +38,7 @@
                                     {% endif %}
                                 </tr>
                             </table>
-                            {% endif %}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
