@@ -356,10 +356,16 @@ link to github
 
 ###### [*Back to contents*](#contents)
 
-### Responsivity Images
+### Manual Testing
+
+I was manually testing all throughout the project, making sure a new feature or fix was working as intended before each commit. As such you can infer that each commit message is a test in itself, describing the tests that were done.
+
+### Automated Testing
+
+I used CoPilot at the end of the project to perform some automated testing via the tests.py file, you can see this later in the Readme [in the Python Section](####Python)
 
 ###### [*Back to contents*](#contents)
-<!-- TODO: Add all pages -->
+
 
 ###### [*Back to contents*](#contents)
 
@@ -672,35 +678,6 @@ At the beginning of the project, I had issues understanding how the files linked
 ![CoPilot base.html Issue](docs/bugs/ai-basebug-3-settings-after.png)
 
 ![CoPilot base.html Issue](docs/bugs/ai-basebug3-solved.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### no User_Profile created when registering
 
