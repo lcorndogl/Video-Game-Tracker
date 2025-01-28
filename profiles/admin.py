@@ -5,7 +5,8 @@ from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(User_Profile)
 class User_Profile(SummernoteModelAdmin):
-    list_display = ('user', 'platform', 'game', 'created_on', 'updated_on', 'privacy')
+    list_display = ('user', 'platform', 'game', 'created_on', 'updated_on',
+                    'privacy')
 
 
 @admin.register(Game)
@@ -16,14 +17,17 @@ class GameAdmin(SummernoteModelAdmin):
 @admin.register(Platform)
 class PlatformAdmin(SummernoteModelAdmin):
     list_display = ('platform',)
-    
+
+
 @admin.register(Privacy)
 class PrivacyAdmin(SummernoteModelAdmin):
-    list_display = ("id",'privacy')
+    list_display = ("id", 'privacy')
+
 
 @admin.register(User_Library)
 class LibraryAdmin(SummernoteModelAdmin):
-    list_display = ("id", 'game', 'user', 'created_on', 'updated_on', 'completed')
+    list_display = ("id", 'game', 'user', 'created_on', 'updated_on',
+                    'completed')
 
 
 # Register your models here.
