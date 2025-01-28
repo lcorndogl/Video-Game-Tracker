@@ -93,7 +93,7 @@ class ProfileList(generic.ListView):
                 User_Profile.objects
                 .filter(privacy__lt="2")
                 .order_by("-updated_on")
-                )
+            )
 
     context_object_name = 'profiles'
     template_name = "profiles/profiles.html"

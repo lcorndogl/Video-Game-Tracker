@@ -130,7 +130,7 @@ p {
 
 .table tr:hover {
   background-color: var(--peri);
-  color: var (--jet);
+  color: var(--jet);
 }
 
 /* Modal Styling  */
@@ -142,7 +142,7 @@ p {
 /* Form styling */
 .form-control {
   background-color: var(--jet);
-  color: var (--yel);
+  color: var(--yel);
   border: 1px solid var(--peri);
 }
 

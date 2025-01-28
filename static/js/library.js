@@ -1,3 +1,4 @@
+/* Called in the profiles/manage.html file when a user wants to remove a game from their library */
 function confirmRemove(gameId, gameName) {
     document.getElementById('remove_game_id').value = gameId;
     document.getElementById('gameName').textContent = gameName;
