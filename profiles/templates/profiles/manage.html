@@ -9,11 +9,13 @@
     <div class="row">
         <!-- Profile -->
         <div class="col-12 mt-3 left">
+            <!-- Checks to see if the user is logged in or not  -->
             {% if not user.is_authenticated %}
             <h1>ERROR: You must be logged in to modify your profile</h1>
             {% else %}
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center">
+                    <!-- Pulls information about the logged in users profile and allows them to add new games, update their library and remove games that they no longer own -->
                     <h1>Modifying Profile: {{ user }}</h1>
                     <hr>
                     <div class="container">
@@ -32,7 +34,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
 
                             <!-- Manage Profile Form -->
                             <div class="col-lg-4 col-md-6 col-sm-12">
@@ -83,7 +84,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

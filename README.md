@@ -1,46 +1,3 @@
-<!-- TODO:
-Security
--Allauth
--Defensive Design
--CSRF Tokens
-
-CRUD
-
-Project Setup:
-
-Project setup
-```
-pip install Django~=4.2.1
-pip3 install dj-database-url~=0.5 psycopg2
-pip3 install gunicorn~=20.1
-pip3 freeze --local > requirements.txt
-django-admin startproject videoGameTracker .
-echo "web: gunicorn videoGameTracker.wsgi" > Procfile
-echo 'import os
-os.environ["DATABASE_URL"]=""
-os.environ["SECRET_KEY"]="nananana"
-os.environ["DEBUG"]=1' > env.py
-echo "
-env.py" >> .gitignore
-python3 manage.py migrate
-python3 manage.py runserver
-
-Adjust allowed hosts
-CSRF_TRUSTER_ORIGINS
-python3 manage.py startapp <<appname>>
-Add to installed apps
-
-Create DB & add to config vars
-
-Heroku:
-Add config vars
-Link to github
-check eco dinos are on
-
-```
-
--->
-
 # Video Gaming Tracker
 
 ## [Link to Live Site](https://video-game-tracker-f52ca7e7c2d0.herokuapp.com)
@@ -96,6 +53,89 @@ During my project I prioritised features of the site, defining whether features 
 The main scope of the project was to create an interface for users to be able to interact with the database to store the games that they owned which ones they have completed.
 
 ###### [*Back to contents*](#contents)
+
+#### Project Setup
+
+To help speed up the setup of the project, I made a few lines of code that could be run in the terminal to create all of the basic files to form a basis for the project:
+
+```command line
+pip install Django~=4.2.1
+pip3 install dj-database-url~=0.5 psycopg2
+pip3 install gunicorn~=20.1
+pip3 freeze --local > requirements.txt
+django-admin startproject videoGameTracker .
+echo "web: gunicorn videoGameTracker.wsgi" > Procfile
+echo 'import os
+os.environ["DATABASE_URL"]=""
+os.environ["SECRET_KEY"]="nananana"
+os.environ["DEBUG"]=1' > env.py
+echo "
+env.py" >> .gitignore
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
+This allowed me to have only a few additional lines that I had to run to create the project. These tasks were:
+
+- Adjust the allowed hosts
+- Set CSRF_TRUSTER_ORIGINS
+- Run the startapp command
+- Add the app to the INSTALLED_APPS
+- Create Database on CI Database Maker
+- Deploy to Heroku (Steps later in the readme)
+
+#### AI Influence
+
+AI has been influential in getting my project to completion, through struggling at the start without using it, to then utilising CoPilot to help understand how the models/views/html files all link together. This sped up the generation of code massively as it helped to wrap my head around how Django all works together in an intricate manner, and providing me a better understanding of how to troubleshoot later problems that came up, as well as understanding what the errors were saying when referencing the specific file names when DEBUG was enabled.
+
+#### Entity Relationship Diagrams
+
+I started out with a simple idea for my ERD, looking at creating users and connecting them to a User_Library so they could mark which games they owned and had completed.
+
+![Initial ERD](docs/readme/ERD/ERD-initial.png)
+
+As the project developed, there were more models added, and as such the ERD became a bit more complex due to developments such as having users select a game and platforms from lists instead of having them input the data manually. I used CoPilot to generate an ERD for this as below:
+
+### Entity Relationship Diagram
+
+```plaintext
++-----------------+          +-----------------+          +-----------------+
+|      User       |<-------->|  User_Profile   |<-------->|     Privacy     |
++-----------------+          +-----------------+          +-----------------+
+| id (PK)         |          | id (PK)         |          | id (PK)         |
+| username        |          | user (FK)       |          | privacy         |
+| email           |          | game (FK)       |          +-----------------+
+| password        |          | platform (FK)   |
++-----------------+          | created_on      |
+                             | updated_on      |
+                             | privacy (FK)    |
+                             +-----------------+
+                                    |
+                                    |
+                                    v
+                             +-----------------+
+                             |     Comment     |
+                             +-----------------+
+                             | id (PK)         |
+                             | profile (FK)    |
+                             | commenter (FK)  |
+                             | body            |
+                             | approved        |
+                             | created_on      |
+                             +-----------------+
+
++-----------------+          +-----------------+          +-----------------+
+|      Game       |<-------->|  User_Library   |<-------->|    Platform     |
++-----------------+          +-----------------+          +-----------------+
+| id (PK)         |          | id (PK)         |          | id (PK)         |
+| game            |          | user (FK)       |          | platform        |
++-----------------+          | created_on      |          +-----------------+
+                             | updated_on      |
+                             | game (FK)       |
+                             | platform (M2M)  |
+                             | completed       |
+                             +-----------------+
+```
 
 ### Wireframes
 
@@ -362,10 +402,7 @@ I was manually testing all throughout the project, making sure a new feature or 
 
 ### Automated Testing
 
-I used CoPilot at the end of the project to perform some automated testing via the tests.py file, you can see this later in the Readme [in the Python Section](####Python)
-
-###### [*Back to contents*](#contents)
-
+I used CoPilot at the end of the project to perform some automated testing via the tests.py file, you can see this later in the Readme [in the Python Section](#python)
 
 ###### [*Back to contents*](#contents)
 
@@ -697,7 +734,6 @@ Here you can see that the profile doesn't exist in the admin panel but the manag
 
 ![CoPilot User_Profile Issue](docs/bugs/ai-signup-no_profile_fixed2.png)
 
-
 ###### [*Back to contents*](#contents)
 
 ## Credits
@@ -734,7 +770,7 @@ I have used the content from the Django walkthrough as a guide for creating the 
 
 Diagram GPT was used to create my planned ERD using the prompt below
 
-```markdown
+```plaintext
 A table called user containing Unique UserID (autoincrementing), username (String), favourite console (String) & favourite game (String)
 A tabled called backlog, containing the UserID from the User table as a foreign key, and a game field (String)
 A table called completed, containing the UserID from the User table as a foreign key, and a game field (String)
