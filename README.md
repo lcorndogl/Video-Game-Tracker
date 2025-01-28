@@ -39,19 +39,21 @@ check eco dinos are on
 
 ```
 
-EZGif Convertor: https://ezgif.com/
 -->
 
 # Video Gaming Tracker
-<!-- TODO: Update to heroku url -->
+
 ## [Link to Live Site](https://video-game-tracker-f52ca7e7c2d0.herokuapp.com)
 
 ## Contents
 <!-- TODO: AI this  -->
+
 ## Introduction
 
+This is a project to allow users to create an account so they can track which games they own and which have compeleted. They can also set their profile for other users to see, or even unregistered users.
+
 ###### [*Back to contents*](#contents)
-<!-- TODO: -->
+
 ## User Experience
 
 ###### [*Back to contents*](#contents)
@@ -61,27 +63,37 @@ EZGif Convertor: https://ezgif.com/
 ###### [*Back to contents*](#contents)
 
 #### External User Story
-<!-- TODO:  -->
+
+- Create an account.
+- Add which games that I own.
+- Set my favourite game/platform.
+- Set privacy of my profile so only people with the correct permissions can view it.
+
 ###### [*Back to contents*](#contents)
 
 #### Site Owner User Story
-<!-- TODO: -->
+
+- The website looks consistent across each page.
+
 ###### [*Back to contents*](#contents)
 
 ### Strategy
-<!-- TODO: -->
 
 #### Agile
+
+I used an agile methodology for the project, making use of a github project board which can be found [here](https://github.com/users/lcorndogl/projects/8/views/1).
 
 ###### [*Back to contents*](#contents)
 
 #### MoSCoW
 
+During my project I prioritised features of the site, defining whether features were a Must Have, Should Have or a Could Have priority.
+
 ###### [*Back to contents*](#contents)
 
 ### Scope
-<!-- TODO: 
--->
+
+The main scope of the project was to create an interface for users to be able to interact with the database to store the games that they owned which ones they have completed.
 
 ###### [*Back to contents*](#contents)
 
@@ -140,8 +152,10 @@ EZGif Convertor: https://ezgif.com/
 ###### [*Back to contents*](#contents)
 
 #### Mobile / Tablet / Desktop breakpoints
-<!-- TODO: 
--->
+
+I have utilised the breakpoints that are specified in bootstrap using the grid feature, using the col-lg, col-md and col-sm classes
+
+For avoidance of doubt - the breakpoints these refer to are 960px, 720px and 576px respectively.
 
 ###### [*Back to contents*](#contents)
 
@@ -150,13 +164,12 @@ EZGif Convertor: https://ezgif.com/
 ###### [*Back to contents*](#contents)
 
 ### Colour Scheme
-<!-- TODO: 
- -->
+
  I chose a dark theme for the site with colours like blue, yellow and red, as a homage to what an old arcade game machine would look like.
 
 ### Imagery
-<!-- TODO: find out where images come from -->
-<!-- The imagery used in this project has been acquired from xyz -->
+
+The game controller icon has been used via linking to it on the icons8 website.
 
 ###### [*Back to contents*](#contents)
 
@@ -178,33 +191,33 @@ When a user loads the site, a homepage is displayed, this page has a logo, site 
 
 ### Profiles
 
-A page that is accessible by all, it allows to view all existing users who have marked their profile as public - being accessible without needing to be logged in
+A page that is accessible by all, it allows to view all existing users who have marked their profile as public - being accessible without needing to be logged in.
 
 ### Sign Up
 
 #### Logged In
 
-A page showing which account the user is signed in to, along with buttons to either go to the Home page, or Logout
+Django does not allow a logged in user to access the sign up page and instead redirects to the homepage.
 
 #### Logged Out
 
-A page showing the sign up form, allowing a user to sign up to the website
+A page showing the sign up form, allowing a user to sign up to the website.
 
 ### Log In
 
 #### Logged In
 
-A page showing which account the user is signed in to, along with buttons to either go to the Home page, or Logout
+Django does not allow a logged in user to access the login page and instead redirects to the homepage.
 
 #### Logged Out
 
-A page showing a form to sign into a created account, allowing users to sign into their account on the website
+A page showing a form to login to a created account, allowing users to login to their account on the website
 
 ### Log Out
 
 #### Logged Out
 
-A page showing a form to sign into a created account, allowing users to sign into their account on the website
+A page showing a form to login to a created account, allowing users to login to their account on the website
 
 #### Logged In
 
@@ -214,14 +227,25 @@ A page showing a page with the options to either go to the Home page, or confirm
 
 #### Logged In
 
-TODO:
+A page allowing users to add games to their library and adjust the completed status or remove games, as well as set their favourites and account privacy
 
 #### Logged Out
 
-A page informing that they must be logged in to edit their profile, provides a pair of buttons that redirect the user to either the Home page, or the Sign In Login Page
+Django does not allow a logged out user to access the edit profile page and instead redirects to the homepage.
 
 ## Future Features
-<!-- TODO: -->
+
+### Styling
+
+In future I would like to amend the styling so it looks like the code from within the `<main>` section of the website was like it was in a retro arcade game machine
+
+### User adding of games/platform
+
+In future I would like a user to be able to add new games or platforms as they are released, being submitted for approval via a superuser.
+
+### Model field name conflicts
+
+There are some errors generated by crispy forms which I didn't have the time to fix yet as I tried customising the form in the manage.html to pull each field in individually, however it adds a div with an ID in at that point, and due to the favourites and add games both being fields from the 'Game' model it creates the same div ID for them, I plan to fix this as part of a future feature, either via some javascript to amend the div id on load, digging deeper into how crispy forms works, or adjusting the fields in the User_Library and User_Profile models so they aren't both called Game/Platform
 
 ###### [*Back to contents*](#contents)
 
@@ -302,6 +326,7 @@ CoPilot has been used as the AI tool in this project, utilising it for both help
 ## Deployment
 
 1) Add the required files to the git repository with the command `git add .`
+
 2) Commit the changes to the repository with the command commit command `git commit -m "Final project commit"`
 
 3) [Create new app on Heroku](https://dashboard.heroku.com/new-app)
@@ -343,19 +368,281 @@ link to github
 ###### [*Back to contents*](#contents)
 
 #### HTML
-<!-- TODO: Add for all pages
- -->
+
+##### Home
+
+###### Logged In W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LI-Index.png)
+
+###### Logged In WAVE
+
+![Homepage](docs/readme/validation/WAVE-LI-Home.png)
+
+###### Logged Out W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LO-Index.png)
+
+###### Logged Out WAVE
+
+![Homepage](docs/readme/validation/WAVE-LO-Home.png)
+
+##### Profiles
+
+###### Logged In W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LI-Profiles.png)
+
+###### Logged In WAVE
+
+![Homepage](docs/readme/validation/WAVE-LI-Profiles.png)
+
+###### Logged Out W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LO-Profiles.png)
+
+###### Logged Out WAVE
+
+![Homepage](docs/readme/validation/WAVE-LO-Profiles.png)
+
+##### Detailed Profiles
+
+###### Logged In W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LI-Detailed.png)
+
+###### Logged In WAVE
+
+![Homepage](docs/readme/validation/WAVE-LI-Detailed.png)
+
+###### Logged Out W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LO-Detailed.png)
+
+###### Logged Out WAVE
+
+![Homepage](docs/readme/validation/WAVE-LO-Detailed.png)
+
+##### Sign Up
+
+###### Logged Out W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LO-Signup.png)
+
+###### Logged Out WAVE
+
+![Homepage](docs/readme/validation/WAVE-Signup.png)
+
+##### Login
+
+###### Logged Out W3 Schools
+
+![Homepage](docs/readme/validation/W3S-LO-Login.png)
+
+###### Logged Out WAVE
+
+![Homepage](docs/readme/validation/WAVE-Login.png)
+
+##### Edit Profile
+
+###### Logged In W3 Schools
+
+There are some errors generated by crispy forms which I didn't have the time to fix yet as I tried customising the form in the manage.html to pull each field in individually, however it adds a div with an ID in at that point, and due to the favourites and add games both being fields from the 'Game' model it creates the same div ID for them, I plan to fix this as part of a future feature, either via some javascript to amend the div id on load, digging deeper into how crispy forms works, or adjusting the fields in the User_Library and User_Profile models so they aren't both called Game/Platform
+
+![Homepage](docs/readme/validation/W3S-LI-Edit-Profiles.png)
+
+###### Logged In WAVE
+
+![Homepage](docs/readme/validation/WAVE-Modify.png)
+
+##### Logout
+
+###### Logged In W3 Schools
+
+![Homepage](docs/readme/validation/W3S-Logout.png)
+
+###### Logged In WAVE
+
+![Homepage](docs/readme/validation/WAVE-Logout.png)
 
 #### CSS
-<!-- TODO: Add for all pages
--->
+
+##### Codestar CSS
+
+![Codestar CSS](docs/readme/validation/Jig-codestar.png)
+
+##### Custom CSS
+
+![Custom CSS](docs/readme/validation/Jig-style.png)
 
 ### Lighthouse Scores
 
+#### Home
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-LI-M-Home.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-LI-D-Home.png)
+
+##### Logged Out
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-LO-M-Home.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-LO-D-Home.png)
+
+#### Profiles
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-LI-M-Profiles.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-LI-D-Profiles.png)
+
+##### Logged Out
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-LO-M-Profiles.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-LO-D-Profiles.png)
+
+#### Detailed Profile
+
+##### Logged In
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-LI-M-Detailed.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-LI-D-Detailed.png)
+
+##### Logged Out
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-LO-M-Detailed.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-LO-D-Detailed.png)
+
+#### Sign Up
+
+##### Logged Out
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-M-Signup.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-D-Signup.png)
+
+#### Login
+
+##### Logged Out
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-M-Signin.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-D-Signin.png)
+
+#### Edit Profile
+
+##### Logged In
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-M-Modify.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-D-Modify.png)
+
+#### Logout
+
+##### Logged In
+
+###### Mobile
+
+![Lighthouse Test](docs/readme/validation/LH-M-Logout.png)
+
+###### Desktop
+
+![Lighthouse Test](docs/readme/validation/LH-D-Logout.png)
+
 ###### [*Back to contents*](#contents)
 
-<!-- TODO: Add extra Pages from project-->
+### Javascript
+
+#### Comments
+
+This was code taken from the CodeInstitute to create the commenting functionality on user profiles
+
+![JS Hint Validation](docs/readme/validation/JSH-comments.png)
+
+#### Library
+
+This is the code that is used to allow users to remove a game from their library, the unused variable is in there as it is called from an external file, triggered via a user clicking on a button.
+
+![JS Hint Validation](docs/readme/validation/JSH-library.png)
+
+#### Python
+
+##### settings.py
+
+![Pep8 Validation](docs/readme/validation/PEP-settings.png)
+
+##### forms.py
+
+![Pep8 Validation](docs/readme/validation/PEP-forms.png)
+
+##### models.py
+
+![Pep8 Validation](docs/readme/validation/PEP-models.png)
+
+##### tests.py
+
+![Pep8 Validation](docs/readme/validation/PEP-tests.png)
+
+##### urls.py
+
+###### videoGameTracker/urls.py
+
+![Pep8 Validation](docs/readme/validation/PEP-vGT-urls.png)
+
+###### profiles/urls.py
+
+![Pep8 Validation](docs/readme/validation/PEP-prof-urls.png)
+
+##### views.py
+
+![Pep8 Validation](docs/readme/validation/PEP-views.png)
+
 ## Bugs
+
+### Model fields the same in two models
+
+There are some errors generated by crispy forms which I didn't have the time to fix yet as I tried customising the form in the manage.html to pull each field in individually, however it adds a div with an ID in at that point, and due to the favourites and add games both being fields from the 'Game' model it creates the same div ID for them, I plan to fix this as part of a future feature, either via some javascript to amend the div id on load, digging deeper into how crispy forms works, or adjusting the fields in the User_Library and User_Profile models so they aren't both called Game/Platform
+
+### 
+
 <!-- TODO: -->
 ###### [*Back to contents*](#contents)
 
@@ -379,52 +666,30 @@ I have used the content from the Django walkthrough as a guide for creating the 
 
 ###### [*Back to contents*](#contents)
 
-<!-- #### Javascript code used to collapse navbar when a link is clicked
-TODO: Implement?!?
-```javascript
-<script>
-    document
-        .querySelectorAll(".navbar-collapse .nav-link")
-        .forEach((link) => {
-            link.addEventListener("click", function (e) {
-                let section = document.querySelector(e.target.getAttribute("href"));
-                if (section) {
-                    e.preventDefault(); // Prevent default anchor click behavior
-                    let navbarHeight = document.querySelector(".navbar-toggler").offsetHeight;
-                    window.scroll({
-                        top: section.offsetTop - navbarHeight, // Adjust for navbar height
-                        behavior: "smooth",
-                    });
-                    document
-                        .querySelector(".navbar-collapse")
-                        .classList.remove("show"); // Collapse navbar
-                }
-            });
-        });
-</script>
-```
+### [Coolors for the colour scheme](https://coolors.co/d62828-beb8eb-ffba08-2a2b2a)
 
-###### [*Back to contents*](#contents) -->
+###### [*Back to contents*](#contents)
 
 ### [Django Documentation](https://docs.djangoproject.com/en/4.2/)
 
 ###### [*Back to contents*](#contents)
 
-### [Coolors for the colour scheme](https://coolors.co/d62828-beb8eb-ffba08-2a2b2a)
-
-###### [*Back to contents*](#contents)
-git
 ### Eraser.io
 
 #### [Diagram GPT](https://www.eraser.io/diagramgpt)
 
 Diagram GPT was used to create my planned ERD using the prompt below
 <!-- TODO: Go through the typings to ensure they are correct - also add a public flag to the User Table -->
-```
+
+```markdown
 A table called user containing Unique UserID (autoincrementing), username (String), favourite console (String) & favourite game (String)
 A tabled called backlog, containing the UserID from the User table as a foreign key, and a game field (String)
 A table called completed, containing the UserID from the User table as a foreign key, and a game field (String)
 ```
+
+### Icons8
+
+#### [Icons8 game controller for the favicon and banner](https://img.icons8.com/?size=100&id=J2AwyRUPwjyg&format=png)
 
 ### Stackoverflow
 
@@ -437,11 +702,6 @@ A table called completed, containing the UserID from the User table as a foreign
 #### [Refresher on Forms (Checkboxes)](https://www.w3schools.com/tags/att_input_type_checkbox.asp)
 
 ###### [*Back to contents*](#contents)
-
-<!-- 
-TODO:
-Any other things I end up using
- -->
 
 ### Fonts
 
